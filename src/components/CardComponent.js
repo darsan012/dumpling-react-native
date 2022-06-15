@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  ScrollViewComponent,
 } from 'react-native';
 import React from 'react';
 import momo from '../assets/momo0.jpeg';
@@ -21,26 +22,28 @@ const CardComponent = ({header, description, price}) => {
   };
   return (
     <>
-      <TouchableOpacity style={styles.container} onPress={cardPressHandler}>
-        <View>
-          <Text style={styles.cardHeader}>{header}</Text>
-          <Text style={styles.cardDescription}>{description}</Text>
-          <View style={styles.cardFooter}>
-            <Text style={styles.pricing}>{price}</Text>
-            <TouchableOpacity onPress={cartPressHandler}>
-              <Icon
-                name="cart-plus"
-                size={20}
-                color="black"
-                style={{padding: 8}}
-              />
-            </TouchableOpacity>
+      <ScrollViewComponent>
+        <TouchableOpacity style={styles.container} onPress={cardPressHandler}>
+          <View>
+            <Text style={styles.cardHeader}>{header}</Text>
+            <Text style={styles.cardDescription}>{description}</Text>
+            <View style={styles.cardFooter}>
+              <Text style={styles.pricing}>{price}</Text>
+              <TouchableOpacity onPress={cartPressHandler}>
+                <Icon
+                  name="cart-plus"
+                  size={20}
+                  color="black"
+                  style={{padding: 8}}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        <View>
-          <Image source={momo} style={styles.imageStyle} />
-        </View>
-      </TouchableOpacity>
+          <View>
+            <Image source={momo} style={styles.imageStyle} />
+          </View>
+        </TouchableOpacity>
+      </ScrollViewComponent>
     </>
   );
 };

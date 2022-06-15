@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {apiRoutes, BASE_URL} from '../config/configRoute';
+import {BASE_URL, apiRoutes} from '../config/configRoute';
 
 export const productApi = createApi({
   reducerPath: 'productApi',
@@ -9,8 +9,9 @@ export const productApi = createApi({
   endpoints: builder => ({
     getAllProducts: builder.query({
       query: () => {
+        console.log('hello');
         return {
-          url: apiRoutes.getAllProducts,
+          url: apiRoutes.getProducts,
           method: 'GET',
         };
       },

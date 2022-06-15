@@ -12,7 +12,6 @@ import momo from '../assets/momo0.jpeg';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const CardComponent = ({item}) => {
-  console.log(item, 'item');
   const cardPressHandler = () => {
     Alert.alert('hello from card');
   };

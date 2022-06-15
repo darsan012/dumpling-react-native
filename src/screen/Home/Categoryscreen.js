@@ -6,6 +6,9 @@ import {useLazyGetAllProductsQuery} from '../../services/productApi';
 import {getProductData} from '../../store/slices/productSlice';
 
 import CardComponent from '../../components/CardComponent';
+import MenuComponent from '../../components/MenuComponent';
+import {Items} from '../../constants/MenuItem';
+
 const Categoryscreen = () => {
   const [getAllProducts, allResponse] = useLazyGetAllProductsQuery();
   const productData = useSelector(state => state.productDetails.productData);
@@ -30,15 +33,40 @@ const Categoryscreen = () => {
       }
     })();
   }, [data]);
-  console.log(productData, 'down');
+  // console.log(productData, 'down');
   return (
     <SafeAreaView>
       <View style={styles.homeContainer}>
-        <Text>This is category screen.</Text>
+        <View style={styles.topSection}>
+          <Text style={{fontSize: 20, fontWeight: '500', color: 'black'}}>
+            Hello Welcome to Dumpling store.
+          </Text>
+        </View>
+        <Text
+          style={{
+            fontSize: 18,
+            color: 'black',
+            alignSelf: 'flex-start',
+            paddingLeft: 23,
+            // paddingTop: 20,
+            marginBottom: -17,
+            fontWeight: '400',
+          }}>
+          Menu
+        </Text>
+        <View style={styles.topScrollBar}>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={Items}
+            renderItem={({item}) => <MenuComponent item={item} />}
+          />
+        </View>
         {productData && (
           <FlatList
             data={productData.data}
             renderItem={({item}) => <CardComponent item={item} />}
+            showsVerticalScrollIndicator={false}
           />
         )}
       </View>
@@ -48,8 +76,19 @@ const Categoryscreen = () => {
 
 const styles = StyleSheet.create({
   homeContainer: {
-    justifyContent: 'center',
     alignItems: 'center',
+    paddingBottom: 20,
+  },
+  topSection: {
+    justifyContent: 'center',
+  },
+  topScrollBar: {
+    width: 400,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    padding: 18,
   },
 });
 export default Categoryscreen;

@@ -2,7 +2,7 @@ import {configureStore} from '@reduxjs/toolkit';
 import {setupListeners} from '@reduxjs/toolkit/query';
 import {productApi} from '../services/productApi';
 import {categoryApi} from '../services/categoryApi';
-import productReducer from '../store/slices/productSlice';
+import productReducer from './slices/productSlice';
 
 export const store = configureStore({
   reducer: {

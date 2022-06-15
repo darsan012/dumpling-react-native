@@ -1,23 +1,15 @@
 import React, {useEffect} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  FlatList,
-} from 'react-native';
+import {View, Text, SafeAreaView, StyleSheet, FlatList} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {
-  useLazyGetAllProductsQuery,
-  useLazyGetSingleProductQuery,
-} from '../../services/productApi';
+import {useLazyGetAllProductsQuery} from '../../services/productApi';
+
+import {getProductData} from '../../store/slices/productSlice';
 
 import CardComponent from '../../components/CardComponent';
 const Categoryscreen = () => {
   const [getAllProducts, allResponse] = useLazyGetAllProductsQuery();
-  // const [getSingleProduct, singleResponse] = useLazyGetSingleProductQuery();
-  // const dispatch = useDispatch();
+  const productData = useSelector(state => state.productDetails.productData);
+  const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
       try {
@@ -28,38 +20,34 @@ const Categoryscreen = () => {
     })();
   }, [getAllProducts]);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       await getSingleProduct('PR-176081763608');
-  //     } catch (error) {
-  //       console.log(error, 'error');
-  //     }
-  //   })();
-  // }, [getSingleProduct]);
-  console.log('hello');
-  allResponse.data && console.log(allResponse.data.data[0], 'All products');
-  // singleResponse.data && console.log(singleResponse.data, 'single product');
-
+  const data = allResponse.data && allResponse.data.data;
+  useEffect(() => {
+    (async () => {
+      try {
+        await (data && dispatch(getProductData({data})));
+      } catch (error) {
+        console.log(error, 'error');
+      }
+    })();
+  }, [data]);
+  console.log(productData, 'down');
   return (
     <SafeAreaView>
-      <ScrollView>
-        <View style={styles.homeContainer}>
-          <Text>This is category screen.</Text>
+      <View style={styles.homeContainer}>
+        <Text>This is category screen.</Text>
+        {productData && (
           <FlatList
-            data={allResponse.data.data}
+            data={productData.data}
             renderItem={({item}) => <CardComponent item={item} />}
           />
-        </View>
-      </ScrollView>
+        )}
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   homeContainer: {
-    // backgroundColor: 'grey',
-    height: 600,
     justifyContent: 'center',
     alignItems: 'center',
   },

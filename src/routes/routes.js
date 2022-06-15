@@ -5,7 +5,7 @@ const screens = [
   {
     name: 'Category',
     component: Categoryscreen,
-    showHeader: true,
+    showHeader: false,
   },
   {
     name: 'Home',

@@ -1,12 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const productSlice = createSlice({
-  name: 'productSlice',
+  name: 'productDetails',
   initialState: {
-    productData: null,
+    userData: null,
   },
   reducers: {
-    getProduct(state, actions) {
+    getProductData(state, actions) {
       try {
         state.productData = actions.payload;
       } catch (error) {
@@ -16,5 +16,5 @@ const productSlice = createSlice({
   },
 });
 
-export const {getProduct} = productSlice.actions;
+export const {getProductData} = productSlice.actions;
 export default productSlice.reducer;

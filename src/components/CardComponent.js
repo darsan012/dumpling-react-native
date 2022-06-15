@@ -5,25 +5,35 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import React from 'react';
 import momo from '../assets/momo0.jpeg';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const CardComponent = () => {
+const CardComponent = ({header, description, price}) => {
+  const cardPressHandler = () => {
+    Alert.alert('hello from card');
+  };
+  const cartPressHandler = () => {
+    Alert.alert('hello from cart');
+  };
   return (
     <>
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={cardPressHandler}>
         <View>
-          <Text style={styles.cardHeader}>Steam Veg Momo</Text>
-          <Text style={styles.cardDescription}>
-            Momo made with proper sanitation
-          </Text>
+          <Text style={styles.cardHeader}>{header}</Text>
+          <Text style={styles.cardDescription}>{description}</Text>
           <View style={styles.cardFooter}>
-            <Text style={styles.pricing}>$10.00</Text>
-            <TouchableOpacity>
-              <Icon name="cart-plus" size={20} color="black" />
+            <Text style={styles.pricing}>{price}</Text>
+            <TouchableOpacity onPress={cartPressHandler}>
+              <Icon
+                name="cart-plus"
+                size={20}
+                color="black"
+                style={{padding: 8}}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -36,6 +46,10 @@ const CardComponent = () => {
 };
 
 export default CardComponent;
+
+CardComponent.defaultProps = {
+  description: 'Fresh and healthy momos',
+};
 
 // const width = Dimensions.get('window').width;
 

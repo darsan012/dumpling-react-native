@@ -61,12 +61,12 @@ const Categoryscreen = () => {
     })();
   }, [data]);
   const renderItem = ({item}) => {
-    const initialState = item.id === selectedId ? 'true' : 'false';
+    const initialState = item.id === selectedId ? true : false;
     return (
       <MenuComponent
         item={item}
         onPress={() => setSelectedId(item.id)}
-        backgroundColor={{initialState}}
+        initialState={{initialState}}
       />
     );
   };

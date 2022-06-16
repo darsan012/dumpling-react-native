@@ -2,12 +2,13 @@ import React from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 
 function MenuComponent({item, onPress, initialState}) {
-  console.log(item);
+  const state = initialState.initialState;
+  console.log(state);
   return (
     <TouchableOpacity
-      style={initialState ? styles.initialContainer : styles.finalContainer}
+      style={state ? styles.initialContainer : styles.finalContainer}
       onPress={onPress}>
-      <Text style={initialState ? styles.initialText : styles.finalText}>
+      <Text style={state ? styles.initialText : styles.finalText}>
         {item.name}
       </Text>
     </TouchableOpacity>

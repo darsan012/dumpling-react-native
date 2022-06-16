@@ -23,17 +23,19 @@ const screens = [
     icon: faSearch,
   },
   {
-    name: 'Cart',
-    component: CartScreen,
-    showHeader: false,
-    icon: faCartArrowDown,
-  },
-  {
     name: 'Category',
     component: CategoryScreen,
     showHeader: false,
     icon: faBoxes,
   },
+  {
+    name: 'Cart',
+    component: CartScreen,
+    showHeader: false,
+    icon: faCartArrowDown,
+    badge:true
+  },
+
 ];
 
 export default screens;

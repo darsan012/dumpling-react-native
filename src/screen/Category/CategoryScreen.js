@@ -9,7 +9,7 @@ import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
 import {Items} from '../../constants/MenuItem';
 
-const Categoryscreen = () => {
+const CategoryScreen = () => {
   const [getAllProducts, allResponse] = useLazyGetAllProductsQuery();
   const productData = useSelector(state => state.productDetails.productData);
   const dispatch = useDispatch();
@@ -93,4 +93,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-export default Categoryscreen;
+export default CategoryScreen;

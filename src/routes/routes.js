@@ -1,5 +1,5 @@
 import CartScreen from '../screen/Cart/CartScreen';
-import Categoryscreen from '../screen/Category/CategoryScreen';
+import CategoryScreen from '../screen/Category/CategoryScreen';
 import HomeScreen from '../screen/Home/HomeScreen';
 import SearchScreen from '../screen/Search/SearchScreen';
 import {
@@ -30,7 +30,7 @@ const screens = [
   },
   {
     name: 'Category',
-    component: Categoryscreen,
+    component: CategoryScreen,
     showHeader: false,
     icon: faBoxes,
   },

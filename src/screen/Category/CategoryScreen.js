@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -9,18 +9,36 @@ import {
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {useLazyGetAllProductsQuery} from '../../services/productApi';
+import {useLazyGetAllCategoriesQuery} from '../../services/categoryApi';
 
 import {getProductData} from '../../store/slices/productSlice';
 
 import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
-import {Items} from '../../constants/MenuItem';
 import momo from '../../assets/momo2.jpg';
+import {Items} from '../../constants/MenuItem';
 
 const Categoryscreen = () => {
+  const [getAllCategories, response] = useLazyGetAllCategoriesQuery();
   const [getAllProducts, allResponse] = useLazyGetAllProductsQuery();
   const productData = useSelector(state => state.productDetails.productData);
   const dispatch = useDispatch();
+
+  const [selectedId, setSelectedId] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await getAllCategories();
+      } catch (error) {
+        console.log(error, 'error');
+      }
+    })();
+  }, [getAllCategories]);
+
+  const categoryName = response.data && response.data.data;
+  // console.log(categoryName);
+
   useEffect(() => {
     (async () => {
       try {
@@ -32,6 +50,7 @@ const Categoryscreen = () => {
   }, [getAllProducts]);
 
   const data = allResponse.data && allResponse.data.data;
+
   useEffect(() => {
     (async () => {
       try {
@@ -41,7 +60,16 @@ const Categoryscreen = () => {
       }
     })();
   }, [data]);
-  // console.log(productData, 'down');
+  const renderItem = ({item}) => {
+    const initialState = item.id === selectedId ? 'true' : 'false';
+    return (
+      <MenuComponent
+        item={item}
+        onPress={() => setSelectedId(item.id)}
+        backgroundColor={{initialState}}
+      />
+    );
+  };
   return (
     <SafeAreaView>
       <View style={styles.homeContainer}>
@@ -49,18 +77,16 @@ const Categoryscreen = () => {
           <ImageBackground
             source={momo}
             style={styles.topSection}
-            imageStyle={{borderTopLeftRadius: 10, borderTopRightRadius: 10}}>
-            {/* <Text style={styles.imageContainerText}>
-              Welcome to the Dumpling store.
-            </Text> */}
-          </ImageBackground>
+            imageStyle={{
+              borderTopLeftRadius: 10,
+              borderTopRightRadius: 10,
+            }}></ImageBackground>
         </View>
         <Text
           style={{
             color: 'black',
             alignSelf: 'flex-start',
             paddingLeft: 22,
-            // paddingTop: 20,
             marginTop: 10,
             marginBottom: -5,
             fontSize: 20,
@@ -70,12 +96,15 @@ const Categoryscreen = () => {
           Menu
         </Text>
         <View style={styles.topScrollBar}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={Items}
-            renderItem={({item}) => <MenuComponent item={item} />}
-          />
+          {categoryName && (
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={categoryName}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
+          )}
         </View>
         {productData && (
           <FlatList

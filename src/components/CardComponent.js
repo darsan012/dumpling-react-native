@@ -7,11 +7,14 @@ import {
   Alert,
 } from 'react-native';
 import React from 'react';
-import momo from '../assets/momo0.jpeg';
-
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
+import momo from '../assets/momo0.jpeg';
+import {BASE_URL} from '../config/configRoute';
+
 const CardComponent = ({item}) => {
+  const hostedImage = BASE_URL + item.image;
+
   const cardPressHandler = () => {
     Alert.alert('hello from card');
   };
@@ -36,7 +39,11 @@ const CardComponent = ({item}) => {
         </View>
       </View>
       <View>
-        <Image source={momo} style={styles.imageStyle} />
+        <Image
+          source={{uri: hostedImage}}
+          defaultSource={momo}
+          style={styles.imageStyle}
+        />
       </View>
     </TouchableOpacity>
   );

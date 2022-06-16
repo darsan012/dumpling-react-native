@@ -1,24 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 
-function MenuComponent({item}) {
-  const [initialState, setFinalState] = useState(false);
-  const pressHandler = () => setFinalState(previousState => !previousState);
+function MenuComponent({item, onPress, initialState}) {
+  console.log(item);
   return (
     <TouchableOpacity
       style={initialState ? styles.initialContainer : styles.finalContainer}
-      onPress={pressHandler}>
+      onPress={onPress}>
       <Text style={initialState ? styles.initialText : styles.finalText}>
-        {item}
+        {item.name}
       </Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  initialContainer: {
+  finalContainer: {
     height: 35,
-    width: 80,
+    width: 100,
     margin: 5,
     backgroundColor: 'rgb(251,251,251)',
     alignItems: 'center',
@@ -32,9 +31,9 @@ const styles = StyleSheet.create({
     elevation: 8,
     borderRadius: 5,
   },
-  finalContainer: {
+  initialContainer: {
     height: 35,
-    width: 80,
+    width: 100,
     margin: 5,
     // backgroundColor: '#7a7a7a',
     backgroundColor: '#3d3d3d',
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
     elevation: 8,
     borderRadius: 5,
   },
-  initialText: {fontSize: 13, color: 'black', fontWeight: '400'},
-  finalText: {fontSize: 13, color: 'white', fontWeight: '400'},
+  finalText: {fontSize: 13, color: 'black', fontWeight: '400'},
+  initialText: {fontSize: 13, color: 'white', fontWeight: '400'},
 });
 export default MenuComponent;

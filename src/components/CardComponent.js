@@ -29,7 +29,7 @@ const CardComponent = ({item}) => {
             <Icon
               name="cart-plus"
               size={20}
-              color="black"
+              color="#3d3d3d"
               style={{padding: 8}}
             />
           </TouchableOpacity>

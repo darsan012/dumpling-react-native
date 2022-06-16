@@ -1,5 +1,12 @@
 import React, {useEffect} from 'react';
-import {View, Text, SafeAreaView, StyleSheet, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  FlatList,
+  ImageBackground,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {useLazyGetAllProductsQuery} from '../../services/productApi';
 
@@ -8,6 +15,7 @@ import {getProductData} from '../../store/slices/productSlice';
 import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
 import {Items} from '../../constants/MenuItem';
+import momo from '../../assets/momo2.jpg';
 
 const Categoryscreen = () => {
   const [getAllProducts, allResponse] = useLazyGetAllProductsQuery();
@@ -33,27 +41,34 @@ const Categoryscreen = () => {
       }
     })();
   }, [data]);
-  console.log(productData, 'down');
+  // console.log(productData, 'down');
   return (
     <SafeAreaView>
       <View style={styles.homeContainer}>
-        {/* <View style={styles.topSection}>
-          <Text style={{fontSize: 20, fontWeight: '500', color: 'black'}}>
-            Hello Welcome to Dumpling store.
-          </Text>
+        <View style={styles.imageContainer}>
+          <ImageBackground
+            source={momo}
+            style={styles.topSection}
+            imageStyle={{borderTopLeftRadius: 10, borderTopRightRadius: 10}}>
+            {/* <Text style={styles.imageContainerText}>
+              Welcome to the Dumpling store.
+            </Text> */}
+          </ImageBackground>
         </View>
         <Text
           style={{
-            fontSize: 18,
             color: 'black',
             alignSelf: 'flex-start',
-            paddingLeft: 23,
+            paddingLeft: 22,
             // paddingTop: 20,
-            marginBottom: -17,
-            fontWeight: '400',
+            marginTop: 10,
+            marginBottom: -5,
+            fontSize: 20,
+            color: 'rgb(0,0,0)',
+            fontWeight: '500',
           }}>
           Menu
-        </Text> */}
+        </Text>
         <View style={styles.topScrollBar}>
           <FlatList
             horizontal
@@ -81,15 +96,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%',
     width: '100%',
+    backgroundColor: 'rgb(233,233,235)',
   },
   topSection: {
+    width: '100%',
+    height: 200,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageContainerText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: 'black',
   },
   topScrollBar: {
-    width: 400,
-    height: 100,
+    width: 360,
+    height: 60,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'rgb(233,233,235)',
+  },
+  imageContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginHorizontal: 10,
+    paddingTop: 10,
   },
 });
 export default Categoryscreen;

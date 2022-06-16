@@ -33,11 +33,11 @@ const Categoryscreen = () => {
       }
     })();
   }, [data]);
-  // console.log(productData, 'down');
+  console.log(productData, 'down');
   return (
     <SafeAreaView>
       <View style={styles.homeContainer}>
-        <View style={styles.topSection}>
+        {/* <View style={styles.topSection}>
           <Text style={{fontSize: 20, fontWeight: '500', color: 'black'}}>
             Hello Welcome to Dumpling store.
           </Text>
@@ -53,7 +53,7 @@ const Categoryscreen = () => {
             fontWeight: '400',
           }}>
           Menu
-        </Text>
+        </Text> */}
         <View style={styles.topScrollBar}>
           <FlatList
             horizontal
@@ -66,7 +66,9 @@ const Categoryscreen = () => {
           <FlatList
             data={productData.data}
             renderItem={({item}) => <CardComponent item={item} />}
+            keyExtractor={item => item.productId}
             showsVerticalScrollIndicator={false}
+            initialNumToRender={5}
           />
         )}
       </View>
@@ -77,18 +79,17 @@ const Categoryscreen = () => {
 const styles = StyleSheet.create({
   homeContainer: {
     alignItems: 'center',
-    paddingBottom: 20,
+    height: '100%',
+    width: '100%',
   },
   topSection: {
     justifyContent: 'center',
   },
   topScrollBar: {
     width: 400,
+    height: 100,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    padding: 18,
   },
 });
 export default Categoryscreen;

@@ -20,7 +20,7 @@ const App = () => {
               name={obj.name}
               component={obj.component}
               options={() => ({
-                tabBarIcon: ({focused, color}) => {
+                tabBarIcon: ({focused,color}) => {
                   let iconSize;
 
                   iconSize = focused ? 30 : 27;
@@ -33,10 +33,13 @@ const App = () => {
                     />
                   );
                 },
-                tabBarActiveTintColor: 'tomato',
+                tabBarActiveTintColor: 'black',
                 tabBarInactiveTintColor: 'gray',
                 headerShown: obj.showHeader,
-                tabBarLabelStyle: {fontSize: 15, fontWeight: 'bold'},
+                // tabBarLabelStyle: { fontSize: 15, fontWeight: 'bold',marginBottom:8 },
+                // tabBarStyle: { height: 68 },
+                tabBarShowLabel:false
+                
               })}
             />
           ))}

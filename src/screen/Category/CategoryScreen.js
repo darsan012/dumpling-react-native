@@ -3,13 +3,13 @@ import {View, Text, SafeAreaView, StyleSheet, FlatList} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {useLazyGetAllProductsQuery} from '../../services/productApi';
 
-import getProductData from '../../store/slices/productSlice';
+import {getProductData} from '../../store/slices/productSlice';
 
 import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
 import {Items} from '../../constants/MenuItem';
 
-const CategoryScreen = () => {
+const Categoryscreen = () => {
   const [getAllProducts, allResponse] = useLazyGetAllProductsQuery();
   const productData = useSelector(state => state.productDetails.productData);
   const dispatch = useDispatch();
@@ -23,18 +23,17 @@ const CategoryScreen = () => {
     })();
   }, [getAllProducts]);
 
-  let data = allResponse.data && allResponse.data.data;
-  console.log(data);
+  const data = allResponse.data && allResponse.data.data;
   useEffect(() => {
     (async () => {
       try {
         await (data && dispatch(getProductData({data})));
       } catch (error) {
-        console.log(error.message, 'error');
+        console.log(error, 'error');
       }
     })();
   }, [data]);
-  // console.log(productData, 'down');
+  console.log(productData, 'down');
   return (
     <SafeAreaView>
       <View style={styles.homeContainer}>
@@ -93,4 +92,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-export default CategoryScreen;
+export default Categoryscreen;

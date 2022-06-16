@@ -8,9 +8,7 @@ const productSlice = createSlice({
   reducers: {
     getProductData(state, actions) {
       try {
-        // console.log('hello');
         state.productData = actions.payload;
-        console.log(state.productData);
       } catch (error) {
         console.log(error);
       }

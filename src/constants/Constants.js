@@ -1,4 +1,4 @@
-export const stylesConstant = {
+export const Constants = {
     color: {
       primaryColor: '#000',
       secondaryColor: 'white',

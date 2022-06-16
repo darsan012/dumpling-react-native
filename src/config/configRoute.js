@@ -1,6 +1,6 @@
-export const BASE_URL = 'http://192.168.1.73:3001/api/v1/';
+export const BASE_URL = 'http://192.168.1.74:3001/api/v1/';
 
 export const apiRoutes = {
-  getProducts: 'product',
-  getAllCategories: 'category',
+  getProducts: 'product/',
+  getCategories: 'category/',
 };

@@ -2,10 +2,11 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Provider} from 'react-redux';
-import {store} from './src/store/store';
+
 import IconComponent from './src/components/IconComponent';
 
 import screens from './src/routes/routes';
+import {store} from './src/store/store';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +21,7 @@ const App = () => {
               name={obj.name}
               component={obj.component}
               options={() => ({
-                tabBarIcon: ({focused,color}) => {
+                tabBarIcon: ({focused, color}) => {
                   let iconSize;
 
                   iconSize = focused ? 30 : 27;
@@ -38,8 +39,7 @@ const App = () => {
                 headerShown: obj.showHeader,
                 // tabBarLabelStyle: { fontSize: 15, fontWeight: 'bold',marginBottom:8 },
                 // tabBarStyle: { height: 68 },
-                tabBarShowLabel:false
-                
+                tabBarShowLabel: false,
               })}
             />
           ))}
@@ -50,4 +50,3 @@ const App = () => {
 };
 
 export default App;
-

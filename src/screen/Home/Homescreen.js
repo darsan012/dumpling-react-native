@@ -15,9 +15,10 @@ import hero from '../assets/hero.jpg';
 import {Constants} from '../constants/Constants';
 import FeaturedCard from '../components/FeaturedCard';
 import chilly from '../assets/chillyMomo.jpg';
+// import {useLazyGetAllProductsQuery} from '../services/productApi';
 
 const HomeScreen = () => {
-  const [getAllProducts, response] = useLazyGetAllProductsQuery();
+  // const [getAllProducts, response] = useLazyGetAllProductsQuery();
 
   return (
     <SafeAreaView>

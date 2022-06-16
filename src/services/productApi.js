@@ -9,14 +9,20 @@ export const productApi = createApi({
   endpoints: builder => ({
     getAllProducts: builder.query({
       query: () => {
-        console.log('hello');
         return {
           url: apiRoutes.getProducts,
-          method: 'GET',
+        };
+      },
+    }),
+    getSingleProduct: builder.query({
+      query: id => {
+        return {
+          url: apiRoutes.getProducts + id,
         };
       },
     }),
   }),
 });
 
-export const {useLazyGetAllProductsQuery} = productApi;
+export const {useLazyGetAllProductsQuery, useLazyGetSingleProductQuery} =
+  productApi;

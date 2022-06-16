@@ -7,65 +7,35 @@ import {
   FlatList,
   ImageBackground,
 } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
 import {useLazyGetAllProductsQuery} from '../../services/productApi';
 import {useLazyGetAllCategoriesQuery} from '../../services/categoryApi';
-
-import {getProductData} from '../../store/slices/productSlice';
 
 import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
 import momo from '../../assets/momo2.jpg';
-import {Items} from '../../constants/MenuItem';
 
 const Categoryscreen = () => {
   const [getAllCategories, response] = useLazyGetAllCategoriesQuery();
   const [getAllProducts, allResponse] = useLazyGetAllProductsQuery();
-  const productData = useSelector(state => state.productDetails.productData);
-  const dispatch = useDispatch();
-
   const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
     (async () => {
       try {
         await getAllCategories();
-      } catch (error) {
-        console.log(error, 'error');
-      }
-    })();
-  }, [getAllCategories]);
-
-  const categoryName = response.data && response.data.data;
-  // console.log(categoryName);
-
-  useEffect(() => {
-    (async () => {
-      try {
         await getAllProducts();
       } catch (error) {
         console.log(error, 'error');
       }
     })();
-  }, [getAllProducts]);
+  }, [getAllCategories, getAllProducts]);
 
-  const data = allResponse.data && allResponse.data.data;
-
-  useEffect(() => {
-    (async () => {
-      try {
-        await (data && dispatch(getProductData({data})));
-      } catch (error) {
-        console.log(error, 'error');
-      }
-    })();
-  }, [data]);
   const renderItem = ({item}) => {
-    const initialState = item.id === selectedId ? true : false;
+    const initialState = item._id === selectedId ? true : false;
     return (
       <MenuComponent
         item={item}
-        onPress={() => setSelectedId(item.id)}
+        onPress={() => setSelectedId(item._id)}
         initialState={{initialState}}
       />
     );
@@ -96,19 +66,19 @@ const Categoryscreen = () => {
           Menu
         </Text>
         <View style={styles.topScrollBar}>
-          {categoryName && (
+          {response.data && (
             <FlatList
               horizontal
               showsHorizontalScrollIndicator={false}
-              data={categoryName}
+              data={response.data.data}
               renderItem={renderItem}
-              keyExtractor={item => item.id}
+              keyExtractor={item => item._id}
             />
           )}
         </View>
-        {productData && (
+        {allResponse.data && (
           <FlatList
-            data={productData.data}
+            data={allResponse.data.data}
             renderItem={({item}) => <CardComponent item={item} />}
             keyExtractor={item => item.productId}
             showsVerticalScrollIndicator={false}

@@ -3,7 +3,6 @@ import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 
 function MenuComponent({item, onPress, initialState}) {
   const state = initialState.initialState;
-  console.log(state);
   return (
     <TouchableOpacity
       style={state ? styles.initialContainer : styles.finalContainer}

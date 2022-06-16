@@ -10,15 +10,17 @@ import {
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {useLazyGetAllProductsQuery} from '../services/productApi';
-import logo from '../assets/logo.png';
-import hero from '../assets/hero.jpg';
-import {Constants} from '../constants/Constants';
-import FeaturedCard from '../components/FeaturedCard';
-import chilly from '../assets/chillyMomo.jpg';
+import logo from '../../assets/logo.png';
+import hero from '../../assets/hero.jpg';
+import {Constants} from '../../constants/Constants';
+import FeaturedCard from '../../components/FeaturedCard';
+import chilly from '../../assets/chillyMomo.jpg';
+import {useGetFeaturedProductQuery} from '../../services/productApi';
 // import {useLazyGetAllProductsQuery} from '../services/productApi';
 
 const HomeScreen = () => {
   // const [getAllProducts, response] = useLazyGetAllProductsQuery();
+  const {data, isLoading, error} = useGetFeaturedProductQuery();
 
   return (
     <SafeAreaView>
@@ -32,24 +34,18 @@ const HomeScreen = () => {
         </View>
         <View style={styles.featuredView}>
           <Text style={styles.featuredText}>Featured Items</Text>
-          <FeaturedCard
-            momoImage={chilly}
-            momoName="Chilli MOMO"
-            momoPrice={200}
-            momoDescription="Momo made with proper sanitation"
-          />
-          <FeaturedCard
-            momoImage={chilly}
-            momoName="Chilli MOMO"
-            momoPrice={200}
-            momoDescription="Momo made with proper sanitation"
-          />
-          <FeaturedCard
-            momoImage={chilly}
-            momoName="Chilli MOMO"
-            momoPrice={200}
-            momoDescription="Momo made with proper sanitation"
-          />
+          {isLoading && <Text style={{color:'black'}}>Loading....</Text>}
+          {error && <Text style={{color:'black'}}>Error....</Text>}
+          {data &&
+            data.data.map(obj => (
+              <FeaturedCard
+                key={obj.productId}
+                momoImage={chilly}
+                momoName={obj.name}
+                momoPrice={obj.price}
+                momoDescription={obj.description}
+              />
+            ))}
         </View>
       </ScrollView>
     </SafeAreaView>

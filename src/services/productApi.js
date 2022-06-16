@@ -21,8 +21,19 @@ export const productApi = createApi({
         };
       },
     }),
+    getFeaturedProduct: builder.query({
+      query: () => {
+        return {
+          url: apiRoutes.getFeaturedProducts ,
+        };
+      },
+    }),
   }),
 });
 
-export const {useLazyGetAllProductsQuery, useLazyGetSingleProductQuery} =
-  productApi;
+export const {
+  useLazyGetAllProductsQuery,
+  useLazyGetSingleProductQuery,
+  useGetFeaturedProductQuery,
+  useGetAllProductsQuery,
+} = productApi;

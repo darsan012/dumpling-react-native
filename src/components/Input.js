@@ -1,9 +1,19 @@
 import {SafeAreaView, TextInput, StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import IconComponent from './IconComponent';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 
-const Input = ({secureTextEntry, placeholder, value, onChangeText}) => {
+const Input = ({
+  secureTextEntry,
+  placeholder,
+  value,
+  searchQueryHandler,
+}) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const changeHandler = () => {
+    searchQueryHandler(searchQuery.trim());
+  };
+
   return (
     <>
       <TextInput
@@ -11,8 +21,12 @@ const Input = ({secureTextEntry, placeholder, value, onChangeText}) => {
         secureTextEntry={secureTextEntry}
         placeholder={placeholder}
         defaultValue={value}
-        onChangeText={onChangeText}
+        onChangeText={value => {
+          setSearchQuery(value);
+          searchQueryHandler(value.trim());
+        }}
         placeholderTextColor="black"
+        onBlur={changeHandler}
       />
       <View style={styles.icon}>
         <IconComponent iconName={faSearch} />

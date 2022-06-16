@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, View, Text} from 'react-native';
-import { Constants } from '../constants/Constants';
+import {Constants} from '../constants/Constants';
 
 const FeaturedCard = ({momoImage, momoName, momoPrice, momoDescription}) => {
   return (
@@ -8,10 +8,14 @@ const FeaturedCard = ({momoImage, momoName, momoPrice, momoDescription}) => {
       <Image source={momoImage} style={styles.cardImage} />
       <View style={styles.momoDetails}>
         <View style={styles.textContainer}>
-          <Text style={styles.momoName}>{momoName}</Text>
+          <Text style={styles.momoName} numberOfLines={1}>
+            {momoName}
+          </Text>
           <Text style={styles.momoPrice}>Rs. {momoPrice}</Text>
         </View>
-        <Text style={styles.momoDescription}>{momoDescription} </Text>
+        <Text style={styles.momoDescription} numberOfLines={1}>
+          {momoDescription}{' '}
+        </Text>
       </View>
     </View>
   );
@@ -44,11 +48,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // width: '100%',
-    // alignItems:'center'
   },
 
   momoName: {
+    maxWidth: 200,
     fontSize: 20,
     fontWeight: 'bold',
     paddingRight: 20,
@@ -62,6 +65,7 @@ const styles = StyleSheet.create({
     color: Constants.color.primaryColor,
     marginHorizontal: 20,
     marginTop: 20,
+    maxWidth: 230,
   },
 });
 

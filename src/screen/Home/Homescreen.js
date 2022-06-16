@@ -44,6 +44,7 @@ const HomeScreen = () => {
                 momoName={obj.name}
                 momoPrice={obj.price}
                 momoDescription={obj.description}
+                
               />
             ))}
         </View>

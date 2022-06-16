@@ -8,6 +8,7 @@ import {
   faBoxes,
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
+import ProductDetail from '../screen/ProductDetail/ProductDetail';
 
 const screens = [
   {
@@ -34,6 +35,12 @@ const screens = [
     showHeader: false,
     icon: faCartArrowDown,
     badge:true
+  },
+  {
+    name: 'ProductDetail',
+    component: ProductDetail,
+    showHeader: false,
+    icon: faCartArrowDown,
   },
 
 ];

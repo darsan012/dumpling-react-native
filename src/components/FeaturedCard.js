@@ -8,7 +8,7 @@ import {
   Alert,
   Modal,
 } from 'react-native';
-import {Constants} from '../../constants/Constants';
+import {Constants} from '../constants/Constants';
 
 const FeaturedCard = ({momoImage, momoName, momoPrice, momoDescription}) => {
   const [showModal, showModalSet] = useState(false);
@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-
   momoName: {
     maxWidth: 200,
     fontSize: 20,

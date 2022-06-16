@@ -51,9 +51,9 @@ const CardComponent = ({item}) => {
 
 export default CardComponent;
 
-CardComponent.defaultProps = {
-  description: 'Fresh and healthy momos',
-};
+// CardComponent.defaultProps = {
+//   description: 'Fresh and healthy momos',
+// };
 
 const styles = StyleSheet.create({
   container: {

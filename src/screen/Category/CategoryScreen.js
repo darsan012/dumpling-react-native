@@ -13,12 +13,16 @@ import {useLazyGetAllCategoriesQuery} from '../../services/categoryApi';
 import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
 import momo from '../../assets/momo2.jpg';
+import {useDispatch} from 'react-redux';
 
 const Categoryscreen = () => {
   const [getAllCategories, response] = useLazyGetAllCategoriesQuery();
   const [getAllProducts, allResponse] = useLazyGetAllProductsQuery();
   const [selectedId, setSelectedId] = useState(null);
+  const [horizontalData] = useState([]);
+  const dispatch = useDispatch();
 
+  //for getting data from the api
   useEffect(() => {
     (async () => {
       try {
@@ -30,6 +34,23 @@ const Categoryscreen = () => {
     })();
   }, [getAllCategories, getAllProducts]);
 
+  const categoryData = response.data && response.data.data;
+  const productData = allResponse.data && allResponse.data.data;
+  // console.log(productData, categoryData);
+
+  //for setting data for vertical scrollbar
+  const empty = arr => (arr.length = 0);
+  useEffect(() => {
+    if (productData && categoryData) {
+      empty(horizontalData);
+      productData.map((obj, index) => {
+        if (obj.category._id === selectedId) {
+          horizontalData.push(obj);
+        }
+      });
+    }
+  }, [selectedId, dispatch]);
+  // console.log(horizontalData);
   const renderItem = ({item}) => {
     const initialState = item._id === selectedId ? true : false;
     return (
@@ -76,11 +97,18 @@ const Categoryscreen = () => {
             />
           )}
         </View>
-        {allResponse.data && (
+        {horizontalData && (
           <FlatList
-            data={allResponse.data.data}
+            data={horizontalData}
             renderItem={({item}) => <CardComponent item={item} />}
-            keyExtractor={item => item.productId}
+            showsVerticalScrollIndicator={false}
+            initialNumToRender={5}
+          />
+        )}
+        {!selectedId && productData && (
+          <FlatList
+            data={productData}
+            renderItem={({item}) => <CardComponent item={item} />}
             showsVerticalScrollIndicator={false}
             initialNumToRender={5}
           />

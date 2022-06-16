@@ -1,13 +1,13 @@
-import CartScreen from '../screen/CartScreen';
-import CategoryScreen from '../screen/CategoryScreen';
-import HomeScreen from '../screen/HomeScreen';
+import CartScreen from '../screen/Cart/CartScreen';
+import CategoryScreen from '../screen/Category/CategoryScreen';
+import HomeScreen from '../screen/Home/HomeScreen';
+import SearchScreen from '../screen/Search/SearchScreen';
 import {
   faHome,
   faCartArrowDown,
   faBoxes,
-  faSearch
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
-import SearchScreen from '../screen/SearchScreen';
 
 const screens = [
   {
@@ -34,7 +34,6 @@ const screens = [
     showHeader: false,
     icon: faBoxes,
   },
- 
 ];
 
 export default screens;

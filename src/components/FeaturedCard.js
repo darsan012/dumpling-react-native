@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, View, Text} from 'react-native';
-import {Constants} from '../constants/Constants';
+import { Constants } from '../constants/Constants';
 
 const FeaturedCard = ({momoImage, momoName, momoPrice, momoDescription}) => {
   return (

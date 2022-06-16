@@ -23,14 +23,14 @@ const Categoryscreen = () => {
     })();
   }, [getAllProducts]);
 
-  const data = allResponse.data && allResponse.data.data;
+  let data = allResponse.data && allResponse.data.data;
   console.log(data);
   useEffect(() => {
     (async () => {
       try {
         await (data && dispatch(getProductData({data})));
       } catch (error) {
-        console.log(error, 'error');
+        console.log(error.message, 'error');
       }
     })();
   }, [data]);

@@ -3,11 +3,12 @@ import {createSlice} from '@reduxjs/toolkit';
 const productSlice = createSlice({
   name: 'productDetails',
   initialState: {
-    userData: null,
+    productData: null,
   },
   reducers: {
     getProductData(state, actions) {
       try {
+        // console.log('hello');
         state.productData = actions.payload;
         console.log(state.productData);
       } catch (error) {

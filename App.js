@@ -37,9 +37,10 @@ const App = () => {
                 tabBarActiveTintColor: 'black',
                 tabBarInactiveTintColor: 'gray',
                 headerShown: obj.showHeader,
-                // tabBarLabelStyle: { fontSize: 15, fontWeight: 'bold',marginBottom:8 },
-                // tabBarStyle: { height: 68 },
                 tabBarShowLabel: false,
+                ...(obj.badge?{tabBarBadge:3}:'')
+                
+
               })}
             />
           ))}

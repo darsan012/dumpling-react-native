@@ -3,7 +3,7 @@ import {View, Text, SafeAreaView, StyleSheet, FlatList} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {useLazyGetAllProductsQuery} from '../../services/productApi';
 
-import {getProductData} from '../../store/slices/productSlice';
+import getProductData from '../../store/slices/productSlice';
 
 import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
@@ -24,6 +24,7 @@ const Categoryscreen = () => {
   }, [getAllProducts]);
 
   const data = allResponse.data && allResponse.data.data;
+  console.log(data);
   useEffect(() => {
     (async () => {
       try {
@@ -33,7 +34,7 @@ const Categoryscreen = () => {
       }
     })();
   }, [data]);
-  console.log(productData, 'down');
+  // console.log(productData, 'down');
   return (
     <SafeAreaView>
       <View style={styles.homeContainer}>

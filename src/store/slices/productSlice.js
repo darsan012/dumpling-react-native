@@ -9,6 +9,7 @@ const productSlice = createSlice({
     getProductData(state, actions) {
       try {
         state.productData = actions.payload;
+        console.log(state.productData);
       } catch (error) {
         console.log(error);
       }

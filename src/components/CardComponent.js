@@ -7,11 +7,14 @@ import {
   Alert,
 } from 'react-native';
 import React from 'react';
-import momo from '../assets/momo0.jpeg';
-
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
+import momo from '../assets/momo0.jpeg';
+import {BASE_URL} from '../config/configRoute';
+
 const CardComponent = ({item}) => {
+  const hostedImage = BASE_URL + item.image;
+
   const cardPressHandler = () => {
     Alert.alert('hello from card');
   };
@@ -24,19 +27,19 @@ const CardComponent = ({item}) => {
         <Text style={styles.cardHeader}>{item.name}</Text>
         <Text style={styles.cardDescription}>{item.description}</Text>
         <View style={styles.cardFooter}>
-          <Text style={styles.pricing}>$ {item.price}</Text>
+          <Text style={styles.pricing}>Rs.{item.price}</Text>
           <TouchableOpacity onPress={cartPressHandler}>
-            <Icon
-              name="cart-plus"
-              size={20}
-              color="black"
-              style={{padding: 8}}
-            />
+            <Icon name="cart-plus" size={20} color="#3d3d3d" />
           </TouchableOpacity>
         </View>
       </View>
       <View>
-        <Image source={momo} style={styles.imageStyle} />
+        <Image
+          // source={{uri: hostedImage}}
+          source={momo}
+          defaultSource={momo}
+          style={styles.imageStyle}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -44,9 +47,9 @@ const CardComponent = ({item}) => {
 
 export default CardComponent;
 
-CardComponent.defaultProps = {
-  description: 'Fresh and healthy momos',
-};
+// CardComponent.defaultProps = {
+//   description: 'Fresh and healthy momos',
+// };
 
 const styles = StyleSheet.create({
   container: {
@@ -92,8 +95,9 @@ const styles = StyleSheet.create({
   },
   cardFooter: {
     flex: 1,
+    width: 240,
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
   },
 });

@@ -1,72 +1,99 @@
-import React, {useEffect} from 'react';
-import {View, Text, SafeAreaView, StyleSheet, FlatList} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {useLazyGetAllProductsQuery} from '../../services/productApi';
-
-import {getProductData} from '../../store/slices/productSlice';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  FlatList,
+  ImageBackground,
+} from 'react-native';
+import {useLazyGetAllCategoriesQuery} from '../../services/categoryApi';
+import {useLazyGetProductCategoryWiseQuery} from '../../services/productApi';
 
 import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
-import {Items} from '../../constants/MenuItem';
+import momo from '../../assets/momo2.jpg';
 
 const Categoryscreen = () => {
-  const [getAllProducts, allResponse] = useLazyGetAllProductsQuery();
-  const productData = useSelector(state => state.productDetails.productData);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    (async () => {
-      try {
-        await getAllProducts();
-      } catch (error) {
-        console.log(error, 'error');
-      }
-    })();
-  }, [getAllProducts]);
+  const [getAllCategories, response] = useLazyGetAllCategoriesQuery();
+  const [getProductCategoryWise, getResponse] =
+    useLazyGetProductCategoryWiseQuery();
 
-  const data = allResponse.data && allResponse.data.data;
+  const [selectedId, setSelectedId] = useState('CG-1027626036322');
+
+  //for getting data from the api
   useEffect(() => {
     (async () => {
       try {
-        await (data && dispatch(getProductData({data})));
+        await getAllCategories();
       } catch (error) {
         console.log(error, 'error');
       }
     })();
-  }, [data]);
-  console.log(productData, 'down');
+  }, [getAllCategories]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await getProductCategoryWise(selectedId);
+      } catch (error) {
+        console.log(error, 'error');
+      }
+    })();
+  }, [selectedId, getProductCategoryWise]);
+
+  const productData = getResponse.data && getResponse.data.data;
+
+  const renderItem = ({item}) => {
+    const initialState = item.id === selectedId ? true : false;
+    return (
+      <MenuComponent
+        item={item}
+        onPress={() => setSelectedId(item.id)}
+        initialState={{initialState}}
+      />
+    );
+  };
   return (
     <SafeAreaView>
       <View style={styles.homeContainer}>
-        {/* <View style={styles.topSection}>
-          <Text style={{fontSize: 20, fontWeight: '500', color: 'black'}}>
-            Hello Welcome to Dumpling store.
-          </Text>
+        <View style={styles.imageContainer}>
+          <ImageBackground
+            source={momo}
+            style={styles.topSection}
+            imageStyle={{
+              borderTopLeftRadius: 10,
+              borderTopRightRadius: 10,
+            }}></ImageBackground>
         </View>
         <Text
           style={{
-            fontSize: 18,
             color: 'black',
             alignSelf: 'flex-start',
-            paddingLeft: 23,
-            // paddingTop: 20,
-            marginBottom: -17,
-            fontWeight: '400',
+            paddingLeft: 22,
+            marginTop: 10,
+            marginBottom: -5,
+            fontSize: 20,
+            color: 'rgb(0,0,0)',
+            fontWeight: '500',
           }}>
           Menu
-        </Text> */}
+        </Text>
         <View style={styles.topScrollBar}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={Items}
-            renderItem={({item}) => <MenuComponent item={item} />}
-          />
+          {response.data && (
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={response.data.data}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
+          )}
         </View>
         {productData && (
           <FlatList
-            data={productData.data}
+            data={productData}
             renderItem={({item}) => <CardComponent item={item} />}
-            keyExtractor={item => item.productId}
             showsVerticalScrollIndicator={false}
             initialNumToRender={5}
           />
@@ -81,15 +108,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%',
     width: '100%',
+    backgroundColor: 'rgb(233,233,235)',
   },
   topSection: {
+    width: '100%',
+    height: 200,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageContainerText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: 'black',
   },
   topScrollBar: {
-    width: 400,
-    height: 100,
+    width: 360,
+    height: 60,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'rgb(233,233,235)',
+  },
+  imageContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginHorizontal: 10,
+    paddingTop: 10,
   },
 });
 export default Categoryscreen;

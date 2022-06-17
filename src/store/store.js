@@ -4,11 +4,13 @@ import {productApi} from '../services/productApi';
 import {categoryApi} from '../services/categoryApi';
 import productReducer from './slices/productSlice';
 import cartReducer from './slices/cartSlice';
+import categoryReducer from './slices/categorySlice';
 
 export const store = configureStore({
   reducer: {
     cartSlice: cartReducer,
     productDetails: productReducer,
+    initialItem: categoryReducer,
     [productApi.reducerPath]: productApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
   },

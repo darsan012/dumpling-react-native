@@ -21,10 +21,17 @@ export const productApi = createApi({
         };
       },
     }),
+    getProductCategoryWise: builder.query({
+      query: id => {
+        return {
+          url: apiRoutes.getProductsCategoryWise + id,
+        };
+      },
+    }),
     getFeaturedProduct: builder.query({
       query: () => {
         return {
-          url: apiRoutes.getFeaturedProducts ,
+          url: apiRoutes.getFeaturedProducts,
         };
       },
     }),
@@ -36,5 +43,6 @@ export const {
   useLazyGetSingleProductQuery,
   useGetFeaturedProductQuery,
   useGetAllProductsQuery,
-  useGetSingleProductQuery
+  useGetSingleProductQuery,
+  useLazyGetProductCategoryWiseQuery,
 } = productApi;

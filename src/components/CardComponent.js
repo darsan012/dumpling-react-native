@@ -27,20 +27,16 @@ const CardComponent = ({item}) => {
         <Text style={styles.cardHeader}>{item.name}</Text>
         <Text style={styles.cardDescription}>{item.description}</Text>
         <View style={styles.cardFooter}>
-          <Text style={styles.pricing}>$ {item.price}</Text>
+          <Text style={styles.pricing}>Rs.{item.price}</Text>
           <TouchableOpacity onPress={cartPressHandler}>
-            <Icon
-              name="cart-plus"
-              size={20}
-              color="#3d3d3d"
-              style={{padding: 8}}
-            />
+            <Icon name="cart-plus" size={20} color="#3d3d3d" />
           </TouchableOpacity>
         </View>
       </View>
       <View>
         <Image
-          source={{uri: hostedImage}}
+          // source={{uri: hostedImage}}
+          source={momo}
           defaultSource={momo}
           style={styles.imageStyle}
         />
@@ -99,8 +95,9 @@ const styles = StyleSheet.create({
   },
   cardFooter: {
     flex: 1,
+    width: 240,
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
   },
 });

@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     margin: 5,
     // backgroundColor: '#7a7a7a',
     backgroundColor: '#3d3d3d',
-
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',

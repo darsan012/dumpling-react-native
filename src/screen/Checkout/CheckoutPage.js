@@ -131,8 +131,9 @@ const CheckoutScreen = () => {
               onBlur={nameValidation}
             />
           </View>
-          {Object.keys(nameErr).map(key => (
+          {Object.keys(nameErr).map((key, index) => (
             <Text
+              key={index}
               style={{
                 color: 'red',
                 fontSize: 10,
@@ -170,8 +171,9 @@ const CheckoutScreen = () => {
               onBlur={emailValidation}
             />
           </View>
-          {Object.keys(emailErr).map(key => (
+          {Object.keys(emailErr).map((key, index) => (
             <Text
+              key={index}
               style={{
                 color: 'red',
                 fontSize: 10,

@@ -35,7 +35,8 @@ const CardComponent = ({item}) => {
       </View>
       <View>
         <Image
-          source={{uri: hostedImage}}
+          // source={{uri: hostedImage}}
+          source={momo}
           defaultSource={momo}
           style={styles.imageStyle}
         />

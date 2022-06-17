@@ -1,10 +1,14 @@
 import React from 'react'
 import { ScrollView,Text } from 'react-native'
+import AddToCartCard from '../../components/AddToCartCard'
+import Header from '../../components/Headers'
+
 
 const CartScreen = () => {
   return (
       <ScrollView>
-          <Text>Cart Screen</Text>
+      <Header text="Add to Cart Page" fontSize={30} />
+      <AddToCartCard  />
     </ScrollView>
   )
 }

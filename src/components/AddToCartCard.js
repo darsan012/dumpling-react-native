@@ -12,9 +12,8 @@ import {Constants} from '../constants/Constants';
 import ButtonComponent from './ButtonComponent';
 import UpDownButton from './UpDownButton';
 
-const AddToCartCard = ({momoImage, momoName, momoPrice, handlePress}) => {
+const AddToCartCard = ({momoImage, momoName, momoPrice}) => {
   return (
-    <TouchableOpacity>
       <View style={styles.cardContainer}>
         <Image source={momoImage} style={styles.cardImage} />
         <View style={styles.momoDetails}>
@@ -37,7 +36,6 @@ const AddToCartCard = ({momoImage, momoName, momoPrice, handlePress}) => {
           </View>
         </View>
       </View>
-    </TouchableOpacity>
   );
 };
 

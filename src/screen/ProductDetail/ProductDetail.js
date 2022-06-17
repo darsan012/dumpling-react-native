@@ -16,19 +16,24 @@ import ButtonComponent from '../../components/ButtonComponent';
 import {Constants} from '../../constants/Constants';
 import UpDownButton from '../../components/UpDownButton';
 import {useLazyGetSingleProductQuery} from '../../services/productApi';
+import {useSelector, useDispatch} from 'react-redux';
+import {addToCart} from '../../store/slices/cartSlice';
 
 const ProductDetail = ({route, navigation}) => {
   const [cartClick, cartClickSet] = useState(false);
   const [productDetail, productDetailSet] = useState('');
   const [getProductDetail, response] = useLazyGetSingleProductQuery();
+  const dispatch = useDispatch();
   const {itemId} = route.params;
-  const handleCartClick = () => {
+  const handleCartClick = (id, name, price, description,hero) => {
     cartClickSet(true);
+    dispatch(addToCart({id, name, price, description,hero}));
   };
   useEffect(() => {
     getProductDetail(itemId).then(res => productDetailSet(res));
   }, [getProductDetail, itemId]);
 
+  console.log(productDetail, 'prnfcbh');
   return (
     <ScrollView>
       <View style={styles.cardContainer}>
@@ -52,7 +57,15 @@ const ProductDetail = ({route, navigation}) => {
             color={Constants.color.colorWarning}
             filled={true}
             iconName={faPlus}
-            onPress={handleCartClick}
+            onPress={() =>
+              handleCartClick(
+                itemId,
+                productDetail.data.data.name,
+                productDetail.data.data.price,
+                productDetail.data.data.description,
+                hero,
+              )
+            }
           />
           <ButtonComponent
             text="Buy Now"

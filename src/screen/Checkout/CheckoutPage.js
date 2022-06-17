@@ -1,8 +1,112 @@
-import React from 'react';
-import {View, Text, StyleSheet, TextInput, Pressable} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Pressable,
+  Alert,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const CheckoutScreen = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [number, setNumber] = useState('');
+  const [address, setAddress] = useState('');
+
+  const [nameErr, setNameErr] = useState({});
+  const [emailErr, setEmailErr] = useState({});
+  const [numberErr, setNumberErr] = useState({});
+  const [addressErr, setAddressErr] = useState({});
+
+  console.log(nameErr);
+  const nameRegex = /^[ a-zA-Z]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+  const onSubmit = e => {
+    e.preventDefault();
+    const isNameValid = nameValidation();
+    const isEmailValid = emailValidation();
+    const isMessageValid = numberValidation();
+    const isAddressValid = addressValidation();
+    if (isNameValid && isEmailValid && isMessageValid && isAddressValid) {
+      //send this data to database or api
+      const value = {
+        name: name,
+        email: email,
+        number: number,
+        address: address,
+      };
+      const setContactInfo = async () => {
+        try {
+          console.log(value, 'value');
+          setName('');
+          setEmail('');
+          setAddress('');
+          setNumber('');
+          console.log(value);
+        } catch (err) {
+          console.error(err, 'error');
+        }
+      };
+      setContactInfo();
+    }
+  };
+  //name validation
+  const nameValidation = () => {
+    const nameErr = {};
+    let isValid = true;
+    if (name.trim().length < 1) {
+      nameErr.nameEmpty = 'Name is required';
+      isValid = false;
+    } else if (!name.match(nameRegex)) {
+      nameErr.numName = 'Invalid name';
+      isValid = false;
+    }
+    setNameErr(nameErr);
+    return isValid;
+  };
+
+  //email validation
+  const emailValidation = () => {
+    const emailErr = {};
+    let isValid = true;
+    if (email.trim().length < 1) {
+      emailErr.emailemp = 'Email is required';
+      isValid = false;
+    } else if (!email.match(emailRegex)) {
+      emailErr.emailName = 'Invalid email';
+      isValid = false;
+    }
+    setEmailErr(emailErr);
+    return isValid;
+  };
+
+  //number validation
+  const numberValidation = () => {
+    const numberErr = {};
+    let isValid = true;
+    if (number.trim().length < 10) {
+      numberErr.msgtxt = 'atleast 10 number are required!!';
+      isValid = false;
+    }
+    setNumberErr(numberErr);
+    return isValid;
+  };
+  //address validation
+  const addressValidation = () => {
+    const addressErr = {};
+    let isValid = true;
+    if (address.trim().length < 4) {
+      addressErr.msgtxt = 'atleast 10 number are required!!';
+      isValid = false;
+    }
+    setAddressErr(addressErr);
+    return isValid;
+  };
+
+  // console.log(name, email, message);
   return (
     <View style={styles.checkoutContainer}>
       <Text
@@ -20,27 +124,50 @@ const CheckoutScreen = () => {
         <View>
           <View style={styles.inputContainer}>
             <Icon name="id-card" size={18} color="rgb(252,200,38)" />
-            <TextInput placeholder="Name" style={styles.input} />
+            <TextInput
+              placeholder="Name"
+              style={styles.input}
+              onChangeText={e => setName(e)}
+              value={name}
+            />
           </View>
+          {Object.keys(nameErr).map(key => {
+            <Text style={{color: ' rgb(204,1,0) ', marginTop: '-20px'}}>
+              {nameErr[key]}
+            </Text>;
+          })}
+
           <View style={styles.inputContainer}>
             <Icon name="phone-alt" size={18} color="rgb(252,200,38)" />
             <TextInput
               placeholder="Phone"
               keyboardType="numeric"
               style={styles.input}
+              onChangeText={e => setNumber(e)}
+              value={number}
             />
           </View>
           <View style={styles.inputContainer}>
             <Icon name="envelope" size={18} color="rgb(252,200,38)" />
-            <TextInput placeholder="Email" style={styles.input} />
+            <TextInput
+              placeholder="Email"
+              style={styles.input}
+              onChangeText={e => setEmail(e)}
+              value={email}
+            />
           </View>
           <View style={styles.inputContainer}>
             <Icon name="home" size={18} color="rgb(252,200,38)" />
-            <TextInput placeholder="Address" style={styles.input} />
+            <TextInput
+              placeholder="Address"
+              style={styles.input}
+              onChangeText={e => setAddress(e)}
+              value={address}
+            />
           </View>
         </View>
       </View>
-      <Pressable style={styles.buttonComponent}>
+      <Pressable style={styles.buttonComponent} onPress={onSubmit}>
         <Text style={styles.buttonText}>Submit</Text>
       </Pressable>
     </View>

@@ -30,7 +30,7 @@ const Categoryscreen = () => {
         console.log(error, 'error');
       }
     })();
-  }, [getAllCategories, getProductCategoryWise, selectedId]);
+  }, [getAllCategories]);
 
   useEffect(() => {
     (async () => {

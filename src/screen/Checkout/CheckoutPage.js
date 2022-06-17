@@ -20,7 +20,6 @@ const CheckoutScreen = () => {
   const [numberErr, setNumberErr] = useState({});
   const [addressErr, setAddressErr] = useState({});
 
-  console.log(nameErr);
   const nameRegex = /^[ a-zA-Z]+$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
@@ -99,7 +98,7 @@ const CheckoutScreen = () => {
     const addressErr = {};
     let isValid = true;
     if (address.trim().length < 4) {
-      addressErr.msgtxt = 'atleast 10 number are required!!';
+      addressErr.msgtxt = 'Must be greater than 3 characters';
       isValid = false;
     }
     setAddressErr(addressErr);
@@ -129,14 +128,18 @@ const CheckoutScreen = () => {
               style={styles.input}
               onChangeText={e => setName(e)}
               value={name}
+              onBlur={nameValidation}
             />
           </View>
-          {Object.keys(nameErr).map(key => {
-            <Text style={{color: ' rgb(204,1,0) ', marginTop: '-20px'}}>
+          {Object.keys(nameErr).map(key => (
+            <Text
+              style={{
+                color: 'red',
+                fontSize: 10,
+              }}>
               {nameErr[key]}
-            </Text>;
-          })}
-
+            </Text>
+          ))}
           <View style={styles.inputContainer}>
             <Icon name="phone-alt" size={18} color="rgb(252,200,38)" />
             <TextInput
@@ -145,8 +148,18 @@ const CheckoutScreen = () => {
               style={styles.input}
               onChangeText={e => setNumber(e)}
               value={number}
+              onBlur={numberValidation}
             />
           </View>
+          {Object.keys(numberErr).map(key => (
+            <Text
+              style={{
+                color: 'red',
+                fontSize: 10,
+              }}>
+              {numberErr[key]}
+            </Text>
+          ))}
           <View style={styles.inputContainer}>
             <Icon name="envelope" size={18} color="rgb(252,200,38)" />
             <TextInput
@@ -154,8 +167,18 @@ const CheckoutScreen = () => {
               style={styles.input}
               onChangeText={e => setEmail(e)}
               value={email}
+              onBlur={emailValidation}
             />
           </View>
+          {Object.keys(emailErr).map(key => (
+            <Text
+              style={{
+                color: 'red',
+                fontSize: 10,
+              }}>
+              {emailErr[key]}
+            </Text>
+          ))}
           <View style={styles.inputContainer}>
             <Icon name="home" size={18} color="rgb(252,200,38)" />
             <TextInput
@@ -163,8 +186,18 @@ const CheckoutScreen = () => {
               style={styles.input}
               onChangeText={e => setAddress(e)}
               value={address}
+              onBlur={addressValidation}
             />
           </View>
+          {Object.keys(addressErr).map(key => (
+            <Text
+              style={{
+                color: 'red',
+                fontSize: 10,
+              }}>
+              {addressErr[key]}
+            </Text>
+          ))}
         </View>
       </View>
       <Pressable style={styles.buttonComponent} onPress={onSubmit}>

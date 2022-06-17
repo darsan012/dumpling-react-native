@@ -18,10 +18,14 @@ import chilly from '../../assets/chillyMomo.jpg';
 import {useGetFeaturedProductQuery} from '../../services/productApi';
 // import {useLazyGetAllProductsQuery} from '../services/productApi';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   // const [getAllProducts, response] = useLazyGetAllProductsQuery();
   const {data, isLoading, error} = useGetFeaturedProductQuery();
-
+  const clickCard = id => {
+    navigation.navigate('ProductDetail', {
+      itemId: id,
+    });
+  };
   return (
     <SafeAreaView>
       <ScrollView>
@@ -34,8 +38,8 @@ const HomeScreen = () => {
         </View>
         <View style={styles.featuredView}>
           <Text style={styles.featuredText}>Featured Items</Text>
-          {isLoading && <Text style={{color:'black'}}>Loading....</Text>}
-          {error && <Text style={{color:'black'}}>Error....</Text>}
+          {isLoading && <Text style={{color: 'black'}}>Loading....</Text>}
+          {error && <Text style={{color: 'black'}}>Error....</Text>}
           {data &&
             data.data.map(obj => (
               <FeaturedCard
@@ -44,6 +48,7 @@ const HomeScreen = () => {
                 momoName={obj.name}
                 momoPrice={obj.price}
                 momoDescription={obj.description}
+                handlePress={() => clickCard(obj.productId)}
               />
             ))}
         </View>

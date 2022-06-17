@@ -9,24 +9,25 @@ import chilly from '../../assets/chillyMomo.jpg';
 import {useGetAllProductsQuery} from '../../services/productApi';
 
 const filterProduct = (productData, query) => {
-  console.log(productData)
   if (query.trim() === '') {
     return productData;
   }
-  console.log(query);
-  return productData.filter(data =>
-  {
+  return productData.filter(data => {
     const productName = data.name.toLowerCase();
-    return productName.includes(query);
-  }
-  );
+    return productName.includes(query.toLowerCase());
+  });
 };
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
   const {data, isLoading, error} = useGetAllProductsQuery();
   const [query, setQuery] = useState('');
   let filteredItems = [];
   data && (filteredItems = filterProduct(data.data, query));
+  const clickCard = id => {
+    navigation.navigate('ProductDetail', {
+      itemId: id,
+    });
+  };
   return (
     <ScrollView>
       <Header text="Find your favorite MOMO" fontSize={25} />
@@ -43,14 +44,21 @@ const SearchScreen = () => {
       {isLoading && <Text style={{color: 'black'}}>Loading....</Text>}
       {error && <Text style={{color: 'black'}}>Error....</Text>}
       {data &&
-        filterProduct(data.data, query).map(obj => (
-          <FeaturedCard
-            key={obj.productId}
-            momoImage={chilly}
-            momoName={obj.name}
-            momoPrice={obj.price}
-            momoDescription={obj.description}
-          />
+        (filterProduct(data.data, query).length !== 0 ? (
+          filterProduct(data.data, query).map(obj => (
+            <FeaturedCard
+              key={obj.productId}
+              momoImage={chilly}
+              momoName={obj.name}
+              momoPrice={obj.price}
+              momoDescription={obj.description}
+              handlePress={() => clickCard(obj.productId)}
+            />
+          ))
+        ) : (
+          <Text style={{color: 'black', fontSize: 15, textAlign: 'center'}}>
+            No data found
+          </Text>
         ))}
     </ScrollView>
   );

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Image,
   StyleSheet,
@@ -15,22 +15,36 @@ import Header from '../../components/Headers';
 import ButtonComponent from '../../components/ButtonComponent';
 import {Constants} from '../../constants/Constants';
 import UpDownButton from '../../components/UpDownButton';
+import {useLazyGetSingleProductQuery} from '../../services/productApi';
 
-const ProductDetail = () => {
+const ProductDetail = ({route, navigation}) => {
   const [cartClick, cartClickSet] = useState(false);
+  const [productDetail, productDetailSet] = useState('');
+  const [getProductDetail, response] = useLazyGetSingleProductQuery();
+  const {itemId} = route.params;
   const handleCartClick = () => {
     cartClickSet(true);
   };
+  useEffect(() => {
+    getProductDetail(itemId).then(res => productDetailSet(res));
+  }, [getProductDetail, itemId]);
+
   return (
     <ScrollView>
       <View style={styles.cardContainer}>
         <Header text="Detail about Product" fontSize={30} />
         <Image source={hero} style={styles.cardImage} />
-        <View style={styles.momoDetails}>
-          <Text style={styles.momoName}>Chilly</Text>
-          <Text style={styles.momoPrice}>Rs. 200</Text>
-          <Text style={styles.momoDescription}>jhgyt jhugytrd jyutrd uytr</Text>
-        </View>
+        {productDetail.length !== 0 && (
+          <View style={styles.momoDetails}>
+            <Text style={styles.momoName}>{productDetail.data.data.name}</Text>
+            <Text style={styles.momoPrice}>
+              Rs. {productDetail.data.data.price}
+            </Text>
+            <Text style={styles.momoDescription}>
+              {productDetail.data.data.description}
+            </Text>
+          </View>
+        )}
         {cartClick && <UpDownButton />}
         <View style={styles.buttonWrapper}>
           <ButtonComponent

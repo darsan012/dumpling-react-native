@@ -18,11 +18,16 @@ const filterProduct = (productData, query) => {
   });
 };
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
   const {data, isLoading, error} = useGetAllProductsQuery();
   const [query, setQuery] = useState('');
   let filteredItems = [];
   data && (filteredItems = filterProduct(data.data, query));
+  const clickCard = id => {
+    navigation.navigate('ProductDetail', {
+      itemId: id,
+    });
+  };
   return (
     <ScrollView>
       <Header text="Find your favorite MOMO" fontSize={25} />
@@ -47,6 +52,7 @@ const SearchScreen = () => {
               momoName={obj.name}
               momoPrice={obj.price}
               momoDescription={obj.description}
+              handlePress={() => clickCard(obj.productId)}
             />
           ))
         ) : (

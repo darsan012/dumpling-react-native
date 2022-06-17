@@ -10,22 +10,22 @@ import {
 } from 'react-native';
 import {Constants} from '../constants/Constants';
 
-const FeaturedCard = ({momoImage, momoName, momoPrice, momoDescription}) => {
-  const [showModal, showModalSet] = useState(false);
-  const toggleModal = () => {
-    showModalSet(!showModal);
-  };
-  const createAlert = () =>
-    Alert.alert('Add to Cart',"" ,[
-      {
-        text: "Add to Cart",
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {text: "Cancel", onPress: () => console.log('OK Pressed')},
-    ]);
+const FeaturedCard = ({momoImage, momoName, momoPrice, momoDescription,handlePress}) => {
+  // const [showModal, showModalSet] = useState(false);
+  // const toggleModal = () => {
+  //   showModalSet(!showModal);
+  // };
+  // const createAlert = () =>
+  //   Alert.alert('Add to Cart',"" ,[
+  //     {
+  //       text: "Add to Cart",
+  //       onPress: () => console.log('Cancel Pressed'),
+  //       style: 'cancel',
+  //     },
+  //     {text: "Cancel", onPress: () => console.log('OK Pressed')},
+  //   ]);
   return (
-    <TouchableOpacity onPress={toggleModal}>
+    <TouchableOpacity onPress={handlePress}>
       <View style={styles.cardContainer}>
         <Image source={momoImage} style={styles.cardImage} />
         <View style={styles.momoDetails}>
@@ -40,7 +40,7 @@ const FeaturedCard = ({momoImage, momoName, momoPrice, momoDescription}) => {
           </Text>
         </View>
       </View>
-      {showModal && createAlert()}
+      {/* {showModal && createAlert()} */}
     </TouchableOpacity>
   );
 };

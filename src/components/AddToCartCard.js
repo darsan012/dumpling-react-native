@@ -9,26 +9,34 @@ import {
   Modal,
 } from 'react-native';
 import {Constants} from '../constants/Constants';
-import chilly from '../assets/chillyMomo.jpg';
+import ButtonComponent from './ButtonComponent';
+import UpDownButton from './UpDownButton';
 
-const AddToCartCard = () => {
+const AddToCartCard = ({momoImage, momoName, momoPrice, handlePress}) => {
   return (
     <TouchableOpacity>
       <View style={styles.cardContainer}>
-        <Image source={chilly} style={styles.cardImage} />
+        <Image source={momoImage} style={styles.cardImage} />
         <View style={styles.momoDetails}>
-          <View style={styles.textContainer}>
-            <Text style={styles.momoName} numberOfLines={1}>
-              Chilly
-            </Text>
-            <Text style={styles.momoPrice}>Rs.200</Text>
-          </View>
-          <Text style={styles.momoDescription} numberOfLines={1}>
-            jhtfdr kjiuytr5 liuytre kuiytr
+          <Text style={styles.momoName} numberOfLines={1}>
+            {momoName}
           </Text>
+          <Text style={styles.momoPrice}>Rs. {momoPrice}</Text>
+        </View>
+        <View style={styles.button}>
+          <View style={styles.upDownWrapper}>
+            <UpDownButton />
+          </View>
+          <View style={styles.buttonWrapper}>
+            <ButtonComponent
+              text="Remove"
+              color={Constants.color.colorWarning}
+              filled={true}
+              borderRadius={1}
+            />
+          </View>
         </View>
       </View>
-      {/* {showModal && createAlert()} */}
     </TouchableOpacity>
   );
 };
@@ -45,38 +53,39 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    overflow: 'hidden',
   },
   cardImage: {
-    height: 80,
-    width: 80,
+    height: 112,
+    width: 105,
     marginHorizontal: 5,
   },
   momoDetails: {
     flexDirection: 'column',
     justifyContent: 'center',
-    flex: 1,
+    alignItems: 'center',
+    marginLeft: 10,
   },
-  textContainer: {
-    marginHorizontal: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+
   momoName: {
-    maxWidth: 200,
+    maxWidth: 60,
     fontSize: 20,
     fontWeight: 'bold',
-    paddingRight: 20,
     color: Constants.color.primaryColor,
   },
   momoPrice: {
-    fontSize: 18,
+    fontSize: 15,
     color: Constants.color.colorSuccess,
   },
-  momoDescription: {
-    color: Constants.color.primaryColor,
-    marginHorizontal: 20,
-    marginTop: 20,
-    maxWidth: 230,
+  button: {
+    marginLeft: 30,
+  },
+  upDownWrapper: {
+    height: 46,
+    marginVertical: 10,
+  },
+  buttonWrapper: {
+    width: 126,
   },
 });
 

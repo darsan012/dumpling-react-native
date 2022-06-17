@@ -38,9 +38,10 @@ const App = () => {
                 tabBarInactiveTintColor: 'gray',
                 headerShown: obj.showHeader,
                 tabBarShowLabel: false,
-                ...(obj.badge?{tabBarBadge:3}:'')
-                
-
+                ...(obj.badge ? {tabBarBadge: 3} : ''),
+                ...(obj.name === 'ProductDetail'
+                  ? {tabBarItemStyle: {display: 'none'}}
+                  : {}),
               })}
             />
           ))}

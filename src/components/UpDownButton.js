@@ -23,19 +23,15 @@ const UpDownButton = () => {
 };
 const styles = StyleSheet.create({
   input: {
-    width: '20%',
     borderStyle: 'solid',
     borderColor: 'gray',
     borderWidth: 2,
     color: 'black',
     borderRadius: 1,
-    padding: 18,
-    height: 58,
-    marginTop: 20,
+    marginHorizontal:10
   },
   buttonWrapper: {
     flexDirection: 'row',
-    flex: 1,
     justifyContent: 'center',
   },
 });

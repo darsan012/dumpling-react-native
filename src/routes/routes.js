@@ -2,11 +2,13 @@ import CartScreen from '../screen/Cart/CartScreen';
 import CategoryScreen from '../screen/Category/CategoryScreen';
 import HomeScreen from '../screen/Home/HomeScreen';
 import SearchScreen from '../screen/Search/SearchScreen';
+import CheckoutScreen from '../screen/Checkout/CheckoutPage';
 import {
   faHome,
   faCartArrowDown,
   faBoxes,
   faSearch,
+  faCake,
 } from '@fortawesome/free-solid-svg-icons';
 import ProductDetail from '../screen/ProductDetail/ProductDetail';
 
@@ -34,7 +36,7 @@ const screens = [
     component: CartScreen,
     showHeader: false,
     icon: faCartArrowDown,
-    badge:true
+    badge: true,
   },
   {
     name: 'ProductDetail',
@@ -42,7 +44,12 @@ const screens = [
     showHeader: false,
     icon: faCartArrowDown,
   },
-
+  {
+    name: 'checkout',
+    component: CheckoutScreen,
+    showHeader: false,
+    icon: faCake,
+  },
 ];
 
 export default screens;

@@ -6,6 +6,7 @@ import chilly from '../../assets/chillyMomo.jpg';
 import {Constants} from '../../constants/Constants';
 import ButtonComponent from '../../components/ButtonComponent';
 import {useSelector} from 'react-redux';
+import {Images} from '../../constants/Images';
 
 const CartScreen = ({navigation}) => {
   const {cart, totalAmount} = useSelector(state => state.cart);
@@ -17,10 +18,10 @@ const CartScreen = ({navigation}) => {
     <ScrollView>
       <Header text="Add to Cart Page" fontSize={30} />
 
-      {cart.map(item => (
+      {cart.map((item, i) => (
         <AddToCartCard
           key={item.productId}
-          momoImage={item.hero}
+          momoImage={Images[i]}
           momoName={item.name}
           momoPrice={item.price}
           id={item.productId}

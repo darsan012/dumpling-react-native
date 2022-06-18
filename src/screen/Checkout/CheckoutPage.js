@@ -47,8 +47,8 @@ const CheckoutScreen = () => {
                   quantity: obj.quantity,
                 })),
               ],
+              ...value,
             },
-            value,
           );
           console.log('res', response);
           response.success &&

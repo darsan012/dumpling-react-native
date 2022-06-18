@@ -14,7 +14,7 @@ const ProductDetail = ({route, navigation}) => {
   const [productDetail, productDetailSet] = useState('');
   const [getProductDetail] = useLazyGetSingleProductQuery();
   const dispatch = useDispatch();
-  const {itemId} = route.params;
+  const {itemId,itemImage} = route.params;
   const {cart} = useSelector(state => state.cart);
 
   const handleCartClick = (id, name, price, description, hero) => {
@@ -31,7 +31,7 @@ const ProductDetail = ({route, navigation}) => {
     <ScrollView>
       <View style={styles.cardContainer}>
         <Header text="Detail about Product" fontSize={30} />
-        <Image source={hero} style={styles.cardImage} />
+        <Image source={itemImage} style={styles.cardImage} />
         {productDetail.length !== 0 && (
           <View style={styles.momoDetails}>
             <Text style={styles.momoName}>{productDetail.data.data.name}</Text>

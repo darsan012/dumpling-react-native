@@ -16,14 +16,14 @@ import {Constants} from '../../constants/Constants';
 import FeaturedCard from '../../components/FeaturedCard';
 import chilly from '../../assets/chillyMomo.jpg';
 import {useGetFeaturedProductQuery} from '../../services/productApi';
-// import {useLazyGetAllProductsQuery} from '../services/productApi';
+import {Images} from '../../constants/Images';
 
 const HomeScreen = ({navigation}) => {
-  // const [getAllProducts, response] = useLazyGetAllProductsQuery();
   const {data, isLoading, error} = useGetFeaturedProductQuery();
-  const clickCard = id => {
+  const clickCard = (id,img) => {
     navigation.navigate('ProductDetail', {
       itemId: id,
+      itemImage:img
     });
   };
   return (
@@ -41,14 +41,15 @@ const HomeScreen = ({navigation}) => {
           {isLoading && <Text style={{color: 'black'}}>Loading....</Text>}
           {error && <Text style={{color: 'black'}}>Error....</Text>}
           {data &&
-            data.data.map(obj => (
+            data.data.map((obj, i) => (
               <FeaturedCard
                 key={obj.productId}
-                momoImage={chilly}
+                // momoImage={chilly}
+                momoImage={Images[i]}
                 momoName={obj.name}
                 momoPrice={obj.price}
                 momoDescription={obj.description}
-                handlePress={() => clickCard(obj.productId)}
+                handlePress={() => clickCard(obj.productId, Images[i])}
               />
             ))}
         </View>

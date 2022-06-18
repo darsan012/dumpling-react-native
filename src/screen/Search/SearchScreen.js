@@ -7,6 +7,7 @@ import {faFilter} from '@fortawesome/free-solid-svg-icons';
 import FeaturedCard from '../../components/FeaturedCard';
 import chilly from '../../assets/chillyMomo.jpg';
 import {useGetAllProductsQuery} from '../../services/productApi';
+import { Images } from '../../constants/Images';
 
 const filterProduct = (productData, query) => {
   if (query.trim() === '') {
@@ -23,9 +24,10 @@ const SearchScreen = ({navigation}) => {
   const [query, setQuery] = useState('');
   let filteredItems = [];
   data && (filteredItems = filterProduct(data.data, query));
-  const clickCard = id => {
+  const clickCard = (id,img) => {
     navigation.navigate('ProductDetail', {
       itemId: id,
+      itemImage:img
     });
   };
   return (
@@ -45,14 +47,14 @@ const SearchScreen = ({navigation}) => {
       {error && <Text style={{color: 'black'}}>Error....</Text>}
       {data &&
         (filterProduct(data.data, query).length !== 0 ? (
-          filterProduct(data.data, query).map(obj => (
+          filterProduct(data.data, query).map((obj,i) => (
             <FeaturedCard
               key={obj.productId}
-              momoImage={chilly}
+              momoImage={Images[i]}
               momoName={obj.name}
               momoPrice={obj.price}
               momoDescription={obj.description}
-              handlePress={() => clickCard(obj.productId)}
+              handlePress={() => clickCard(obj.productId,Images[i])}
             />
           ))
         ) : (

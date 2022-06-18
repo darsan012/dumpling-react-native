@@ -13,8 +13,9 @@ import {useLazyGetProductCategoryWiseQuery} from '../../services/productApi';
 import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
 import momo from '../../assets/momo2.jpg';
+import {Images} from '../../constants/Images';
 
-const Categoryscreen = () => {
+const Categoryscreen = ({navigation}) => {
   const [getAllCategories, response] = useLazyGetAllCategoriesQuery();
   const [getProductCategoryWise, getResponse] =
     useLazyGetProductCategoryWiseQuery();
@@ -43,6 +44,13 @@ const Categoryscreen = () => {
   }, [selectedId, getProductCategoryWise]);
 
   const productData = getResponse.data && getResponse.data.data;
+
+  const clickCard = (id,img) => {
+    navigation.navigate('ProductDetail', {
+      itemId: id,
+      itemImage:img
+    });
+  };
 
   const renderItem = ({item}) => {
     const initialState = item.id === selectedId ? true : false;
@@ -93,7 +101,13 @@ const Categoryscreen = () => {
         {productData && (
           <FlatList
             data={productData}
-            renderItem={({item}) => <CardComponent item={item} />}
+            renderItem={({item, index}) => (
+              <CardComponent
+                item={item}
+                itemImage={Images[index]}
+                handlePress={() => clickCard(item.productId,Images[index])}
+              />
+            )}
             showsVerticalScrollIndicator={false}
             initialNumToRender={5}
           />

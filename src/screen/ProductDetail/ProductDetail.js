@@ -1,14 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Image,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Alert,
-  Modal,
-  ScrollView,
-} from 'react-native';
+import {Image, StyleSheet, View, Text, ScrollView} from 'react-native';
 import {faPlus, faCartArrowDown} from '@fortawesome/free-solid-svg-icons';
 import hero from '../../assets/hero.jpg';
 import Header from '../../components/Headers';
@@ -16,14 +7,21 @@ import ButtonComponent from '../../components/ButtonComponent';
 import {Constants} from '../../constants/Constants';
 import UpDownButton from '../../components/UpDownButton';
 import {useLazyGetSingleProductQuery} from '../../services/productApi';
+import {useSelector, useDispatch} from 'react-redux';
+import {addToCart} from '../../store/slices/cartSlice';
 
 const ProductDetail = ({route, navigation}) => {
-  const [cartClick, cartClickSet] = useState(false);
   const [productDetail, productDetailSet] = useState('');
-  const [getProductDetail, response] = useLazyGetSingleProductQuery();
-  const {itemId} = route.params;
-  const handleCartClick = () => {
-    cartClickSet(true);
+  const [getProductDetail] = useLazyGetSingleProductQuery();
+  const dispatch = useDispatch();
+  const {itemId,itemImage} = route.params;
+  const {cart} = useSelector(state => state.cart);
+
+  const handleCartClick = (id, name, price, description, hero) => {
+    dispatch(addToCart({productId: id, name, price, description, hero}));
+  };
+  const handlePress = () => {
+    navigation.navigate('Cart');
   };
   useEffect(() => {
     getProductDetail(itemId).then(res => productDetailSet(res));
@@ -33,7 +31,7 @@ const ProductDetail = ({route, navigation}) => {
     <ScrollView>
       <View style={styles.cardContainer}>
         <Header text="Detail about Product" fontSize={30} />
-        <Image source={hero} style={styles.cardImage} />
+        <Image source={itemImage} style={styles.cardImage} />
         {productDetail.length !== 0 && (
           <View style={styles.momoDetails}>
             <Text style={styles.momoName}>{productDetail.data.data.name}</Text>
@@ -45,20 +43,33 @@ const ProductDetail = ({route, navigation}) => {
             </Text>
           </View>
         )}
-        {cartClick && <UpDownButton />}
+        {cart.filter(item => item.productId === itemId).length !== 0 && (
+          <UpDownButton id={itemId} cart={cart} />
+        )}
         <View style={styles.buttonWrapper}>
           <ButtonComponent
             text="Add to Cart"
             color={Constants.color.colorWarning}
             filled={true}
             iconName={faPlus}
-            onPress={handleCartClick}
+            borderRadius={8}
+            onPress={() =>
+              handleCartClick(
+                itemId,
+                productDetail.data.data.name,
+                productDetail.data.data.price,
+                productDetail.data.data.description,
+                hero,
+              )
+            }
           />
           <ButtonComponent
             text="Buy Now"
             color={Constants.color.colorSuccess}
             filled={true}
+            borderRadius={8}
             iconName={faCartArrowDown}
+            onPress={handlePress}
           />
         </View>
       </View>
@@ -106,10 +117,13 @@ const styles = StyleSheet.create({
     color: Constants.color.primaryColor,
     fontSize: 20,
     marginTop: 20,
+    marginBottom: 20,
   },
   buttonWrapper: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
+    marginTop: 30,
+    width: 390,
   },
 });
 export default ProductDetail;

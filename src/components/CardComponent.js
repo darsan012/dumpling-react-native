@@ -4,39 +4,32 @@ import {
   View,
   Image,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import momo from '../assets/momo0.jpeg';
 import {BASE_URL} from '../config/configRoute';
+import {Constants} from '../constants/Constants';
 
-const CardComponent = ({item}) => {
+const CardComponent = ({item, handlePress, itemImage}) => {
   const hostedImage = BASE_URL + item.image;
 
-  const cardPressHandler = () => {
-    Alert.alert('hello from card');
-  };
-  const cartPressHandler = () => {
-    Alert.alert('hello from cart');
-  };
   return (
-    <TouchableOpacity style={styles.container} onPress={cardPressHandler}>
+    <TouchableOpacity style={styles.container} onPress={handlePress}>
       <View>
         <Text style={styles.cardHeader}>{item.name}</Text>
         <Text style={styles.cardDescription}>{item.description}</Text>
         <View style={styles.cardFooter}>
-          <Text style={styles.pricing}>Rs.{item.price}</Text>
-          <TouchableOpacity onPress={cartPressHandler}>
+          <Text style={styles.pricing}>Rs. {item.price}</Text>
+          <TouchableOpacity onPress={handlePress}>
             <Icon name="cart-plus" size={20} color="#3d3d3d" />
           </TouchableOpacity>
         </View>
       </View>
       <View>
         <Image
-          // source={{uri: hostedImage}}
-          source={momo}
+          source={itemImage}
           defaultSource={momo}
           style={styles.imageStyle}
         />
@@ -46,10 +39,6 @@ const CardComponent = ({item}) => {
 };
 
 export default CardComponent;
-
-// CardComponent.defaultProps = {
-//   description: 'Fresh and healthy momos',
-// };
 
 const styles = StyleSheet.create({
   container: {
@@ -88,6 +77,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 15,
     paddingRight: 170,
+    color: Constants.color.colorSuccess,
   },
   imageStyle: {
     height: 80,

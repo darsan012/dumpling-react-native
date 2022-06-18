@@ -41,28 +41,25 @@ const styles = StyleSheet.create({
     borderWidth: Constants.color.borderWidth,
     color: color,
     borderRadius: 50,
-    padding: 10,
-    marginHorizontal: 10,
-    marginVertical: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   }),
   filledButton: (color,borderRadius) => ({
     backgroundColor: color,
     padding: 10,
-    marginHorizontal: 10,
     borderRadius: borderRadius,
-    marginVertical: 20,
     borderWidth: Constants.color.borderWidth,
-
     borderColor: color,
+    justifyContent: 'center',
+    alignItems: 'center',
   }),
   filledText: {
     color: 'white',
     textAlign: 'center',
     fontWeight: 'bold',
-    marginHorizontal: 15,
+    marginLeft:4
   },
   filledView: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

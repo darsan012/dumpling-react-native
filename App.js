@@ -1,19 +1,21 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
+import RNBootSplash from "react-native-bootsplash";
 
 import IconComponent from './src/components/IconComponent';
-
 import screens from './src/routes/routes';
 import {store} from './src/store/store';
+import {useSelector} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
 const App = () => {
-  return (
-    <Provider store={store}>
-      <NavigationContainer>
+  const Main = () => {
+    const {totalQuantity} = useSelector(state => state.cart);
+    return (
+      <NavigationContainer onReady={() => RNBootSplash.hide({fade:true})}>
         <Tab.Navigator>
           {screens.map(obj => (
             <Tab.Screen
@@ -38,14 +40,26 @@ const App = () => {
                 tabBarInactiveTintColor: 'gray',
                 headerShown: obj.showHeader,
                 tabBarShowLabel: false,
-                ...(obj.badge?{tabBarBadge:3}:'')
-                
-
+                ...(obj.name === 'ProductDetail'
+                  ? {tabBarItemStyle: {display: 'none'}}
+                  : {}),
+                ...(obj.name === 'Checkout'
+                  ? {tabBarItemStyle: {display: 'none'}}
+                  : {}),
+                ...(obj.badge
+                  ? {tabBarBadge: totalQuantity}
+                  : {}),
               })}
             />
           ))}
         </Tab.Navigator>
       </NavigationContainer>
+    );
+  };
+
+  return (
+    <Provider store={store}>
+      <Main />
     </Provider>
   );
 };

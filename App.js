@@ -1,7 +1,8 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
+import RNBootSplash from "react-native-bootsplash";
 
 import IconComponent from './src/components/IconComponent';
 import screens from './src/routes/routes';
@@ -14,7 +15,7 @@ const App = () => {
   const Main = () => {
     const {totalQuantity} = useSelector(state => state.cart);
     return (
-      <NavigationContainer>
+      <NavigationContainer onReady={() => RNBootSplash.hide({fade:true})}>
         <Tab.Navigator>
           {screens.map(obj => (
             <Tab.Screen

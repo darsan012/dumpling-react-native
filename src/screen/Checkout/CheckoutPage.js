@@ -1,14 +1,11 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-} from 'react-native';
+import {View, Text, StyleSheet, TextInput, ToastAndroid} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useSelector } from 'react-redux';
 import ButtonComponent from '../../components/ButtonComponent';
 import Header from '../../components/Headers';
 import {Constants} from '../../constants/Constants';
+import {usePostFormMutation} from '../../services/cartApi';
 
 const CheckoutScreen = () => {
   const [name, setName] = useState('');
@@ -20,6 +17,8 @@ const CheckoutScreen = () => {
   const [emailErr, setEmailErr] = useState({});
   const [numberErr, setNumberErr] = useState({});
   const [addressErr, setAddressErr] = useState({});
+  const cartItems = useSelector((state) => state.cart.cart);
+  const [postForm] = usePostFormMutation();
 
   const nameRegex = /^[ a-zA-Z]+$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -33,13 +32,32 @@ const CheckoutScreen = () => {
     if (isNameValid && isEmailValid && isMessageValid && isAddressValid) {
       //send this data to database or api
       const value = {
-        name: name,
-        email: email,
-        number: number,
+        username: name,
+        phone: number,
         address: address,
+        email: email,
       };
       const setContactInfo = async () => {
         try {
+          const response = await postForm(
+            {
+              orders: [
+                ...cartItems.map(obj => ({
+                  productId: obj.productId,
+                  quantity: obj.quantity,
+                })),
+              ],
+            },
+            value,
+          );
+          console.log('res', response);
+          response.success &&
+            ToastAndroid.show(
+              'Form Submitted successfully !',
+              ToastAndroid.SHORT,
+            );
+          response.error &&
+            ToastAndroid.show('Error submitting form !', ToastAndroid.SHORT);
           console.log(value, 'value');
           setName('');
           setEmail('');
@@ -206,12 +224,13 @@ const CheckoutScreen = () => {
           ))}
         </View>
       </View>
-      <View style={styles.buttonComponent} onPress={onSubmit}>
+      <View style={styles.buttonComponent}>
         <ButtonComponent
           text="Submit"
           filled={true}
           borderRadius={5}
           color={Constants.color.colorWarning}
+          onPress={onSubmit}
         />
       </View>
     </View>

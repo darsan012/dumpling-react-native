@@ -5,4 +5,5 @@ export const apiRoutes = {
   getCategories: '/api/v1/category/',
   getFeaturedProducts: '/api/v1/product/get/featured',
   getProductsCategoryWise: '/api/v1/product/category/',
+  postForm:'api/v1/cart'
 };

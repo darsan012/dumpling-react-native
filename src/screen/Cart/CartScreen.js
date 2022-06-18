@@ -31,7 +31,7 @@ const CartScreen = ({navigation}) => {
         <Header text="Bill" fontSize={25} />
         <View>
           {cart.map(item => (
-            <View style={styles.item}>
+            <View style={styles.item} key={item.productId}>
               <Text style={styles.momoName}>{item.name}</Text>
               <Text style={styles.momoPrice}>
                 Rs. {item.price * item.quantity}

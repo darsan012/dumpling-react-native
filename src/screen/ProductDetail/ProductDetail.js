@@ -4,9 +4,6 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity,
-  Alert,
-  Modal,
   ScrollView,
 } from 'react-native';
 import {faPlus, faCartArrowDown} from '@fortawesome/free-solid-svg-icons';
@@ -27,13 +24,16 @@ const ProductDetail = ({route, navigation}) => {
   const {itemId} = route.params;
   const handleCartClick = (id, name, price, description,hero) => {
     cartClickSet(true);
-    dispatch(addToCart({id, name, price, description,hero}));
+    // dispatch(addToCart({id, name, price, description,hero}));
   };
+  const handlePress = () => {
+    navigation.navigate("Cart")
+  }
   useEffect(() => {
     getProductDetail(itemId).then(res => productDetailSet(res));
   }, [getProductDetail, itemId]);
 
-  console.log(productDetail, 'prnfcbh');
+  // console.log(productDetail, 'prnfcbh');
   return (
     <ScrollView>
       <View style={styles.cardContainer}>
@@ -57,6 +57,7 @@ const ProductDetail = ({route, navigation}) => {
             color={Constants.color.colorWarning}
             filled={true}
             iconName={faPlus}
+            borderRadius={8}
             onPress={() =>
               handleCartClick(
                 itemId,
@@ -71,7 +72,9 @@ const ProductDetail = ({route, navigation}) => {
             text="Buy Now"
             color={Constants.color.colorSuccess}
             filled={true}
+            borderRadius={8}
             iconName={faCartArrowDown}
+            onPress={handlePress}
           />
         </View>
       </View>
@@ -119,10 +122,13 @@ const styles = StyleSheet.create({
     color: Constants.color.primaryColor,
     fontSize: 20,
     marginTop: 20,
+    marginBottom:20
   },
   buttonWrapper: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
+    marginTop: 30,
+    width:390
   },
 });
 export default ProductDetail;

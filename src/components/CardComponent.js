@@ -12,23 +12,23 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import momo from '../assets/momo0.jpeg';
 import {BASE_URL} from '../config/configRoute';
 
-const CardComponent = ({item}) => {
+const CardComponent = ({item,handlePress}) => {
   const hostedImage = BASE_URL + item.image;
 
-  const cardPressHandler = () => {
-    Alert.alert('hello from card');
-  };
-  const cartPressHandler = () => {
-    Alert.alert('hello from cart');
-  };
+  // const cardPressHandler = () => {
+  //   Alert.alert('hello from card');
+  // };
+  // const cartPressHandler = () => {
+  //   Alert.alert('hello from cart');
+  // };
   return (
-    <TouchableOpacity style={styles.container} onPress={cardPressHandler}>
+    <TouchableOpacity style={styles.container} onPress={handlePress}>
       <View>
         <Text style={styles.cardHeader}>{item.name}</Text>
         <Text style={styles.cardDescription}>{item.description}</Text>
         <View style={styles.cardFooter}>
           <Text style={styles.pricing}>Rs.{item.price}</Text>
-          <TouchableOpacity onPress={cartPressHandler}>
+          <TouchableOpacity onPress={handlePress}>
             <Icon name="cart-plus" size={20} color="#3d3d3d" />
           </TouchableOpacity>
         </View>

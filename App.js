@@ -4,7 +4,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Provider} from 'react-redux';
 
 import IconComponent from './src/components/IconComponent';
-
 import screens from './src/routes/routes';
 import {store} from './src/store/store';
 
@@ -40,6 +39,9 @@ const App = () => {
                 tabBarShowLabel: false,
                 ...(obj.badge ? {tabBarBadge: 3} : ''),
                 ...(obj.name === 'ProductDetail'
+                  ? {tabBarItemStyle: {display: 'none'}}
+                  : {}),
+                  ...(obj.name === 'Checkout'
                   ? {tabBarItemStyle: {display: 'none'}}
                   : {}),
               })}

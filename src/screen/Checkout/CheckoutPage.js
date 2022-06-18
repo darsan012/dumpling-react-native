@@ -4,10 +4,11 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  Pressable,
-  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import ButtonComponent from '../../components/ButtonComponent';
+import Header from '../../components/Headers';
+import {Constants} from '../../constants/Constants';
 
 const CheckoutScreen = () => {
   const [name, setName] = useState('');
@@ -108,21 +109,16 @@ const CheckoutScreen = () => {
   // console.log(name, email, message);
   return (
     <View style={styles.checkoutContainer}>
-      <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 23,
-          color: 'black',
-          fontWeight: 'bold',
-          paddingBottom: 50,
-        }}>
-        Checkout
-      </Text>
+      <Header text="Checkout" fontSize={25} />
       <View>
         <Text style={{fontSize: 14, color: 'black'}}>Details</Text>
         <View>
           <View style={styles.inputContainer}>
-            <Icon name="id-card" size={18} color="rgb(252,200,38)" />
+            <Icon
+              name="id-card"
+              size={18}
+              color={Constants.color.colorWarning}
+            />
             <TextInput
               placeholder="Name"
               style={styles.input}
@@ -142,7 +138,11 @@ const CheckoutScreen = () => {
             </Text>
           ))}
           <View style={styles.inputContainer}>
-            <Icon name="phone-alt" size={18} color="rgb(252,200,38)" />
+            <Icon
+              name="phone-alt"
+              size={18}
+              color={Constants.color.colorWarning}
+            />
             <TextInput
               placeholder="Phone"
               keyboardType="numeric"
@@ -162,7 +162,11 @@ const CheckoutScreen = () => {
             </Text>
           ))}
           <View style={styles.inputContainer}>
-            <Icon name="envelope" size={18} color="rgb(252,200,38)" />
+            <Icon
+              name="envelope"
+              size={18}
+              color={Constants.color.colorWarning}
+            />
             <TextInput
               placeholder="Email"
               style={styles.input}
@@ -182,7 +186,7 @@ const CheckoutScreen = () => {
             </Text>
           ))}
           <View style={styles.inputContainer}>
-            <Icon name="home" size={18} color="rgb(252,200,38)" />
+            <Icon name="home" size={18} color={Constants.color.colorWarning} />
             <TextInput
               placeholder="Address"
               style={styles.input}
@@ -202,9 +206,14 @@ const CheckoutScreen = () => {
           ))}
         </View>
       </View>
-      <Pressable style={styles.buttonComponent} onPress={onSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </Pressable>
+      <View style={styles.buttonComponent} onPress={onSubmit}>
+        <ButtonComponent
+          text="Submit"
+          filled={true}
+          borderRadius={5}
+          color={Constants.color.colorWarning}
+        />
+      </View>
     </View>
   );
 };
@@ -241,17 +250,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   buttonComponent: {
-    marginTop: 40,
-    backgroundColor: 'rgb(252,200,38)',
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-  },
-  buttonText: {
-    fontSize: 15,
-    color: 'black',
-    fontWeight: '400',
+    marginTop: 26,
   },
 });
 export default CheckoutScreen;

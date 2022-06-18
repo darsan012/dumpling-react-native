@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   buttonWrapper: {
-    width: 126,
+    width: 139,
   },
 });
 

@@ -8,7 +8,7 @@ import categoryReducer from './slices/categorySlice';
 
 export const store = configureStore({
   reducer: {
-    cartSlice: cartReducer,
+    cart: cartReducer,
     productDetails: productReducer,
     initialItem: categoryReducer,
     [productApi.reducerPath]: productApi.reducer,

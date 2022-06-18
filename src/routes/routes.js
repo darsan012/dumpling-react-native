@@ -45,7 +45,7 @@ const screens = [
     icon: faCartArrowDown,
   },
   {
-    name: 'checkout',
+    name: 'Checkout',
     component: CheckoutScreen,
     showHeader: false,
     icon: faCake,

@@ -8,34 +8,44 @@ import {
   Alert,
   Modal,
 } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 import {Constants} from '../constants/Constants';
+import {removeFromCart} from '../store/slices/cartSlice';
 import ButtonComponent from './ButtonComponent';
 import UpDownButton from './UpDownButton';
 
-const AddToCartCard = ({momoImage, momoName, momoPrice}) => {
+const AddToCartCard = ({momoImage, momoName, momoPrice, id}) => {
+  const {cart} = useSelector(state => state.cart);
+  const dispatch = useDispatch();
+  const removePress = id => {
+    dispatch(removeFromCart({productId: id}));
+  };
   return (
-      <View style={styles.cardContainer}>
-        <Image source={momoImage} style={styles.cardImage} />
-        <View style={styles.momoDetails}>
-          <Text style={styles.momoName} numberOfLines={1}>
-            {momoName}
-          </Text>
-          <Text style={styles.momoPrice}>Rs. {momoPrice}</Text>
+    <View style={styles.cardContainer}>
+      <Image source={momoImage} style={styles.cardImage} />
+      <View style={styles.momoDetails}>
+        <Text style={styles.momoName} numberOfLines={1}>
+          {momoName}
+        </Text>
+        <Text style={styles.momoPrice}>Rs. {momoPrice}</Text>
+      </View>
+      <View style={styles.button}>
+        <View style={styles.upDownWrapper}>
+          {cart.filter(item => item.productId === id).length !== 0 && (
+            <UpDownButton id={id} cart={cart} />
+          )}
         </View>
-        <View style={styles.button}>
-          <View style={styles.upDownWrapper}>
-            <UpDownButton />
-          </View>
-          <View style={styles.buttonWrapper}>
-            <ButtonComponent
-              text="Remove"
-              color={Constants.color.colorWarning}
-              filled={true}
-              borderRadius={1}
-            />
-          </View>
+        <View style={styles.buttonWrapper}>
+          <ButtonComponent
+            text="Remove"
+            color={Constants.color.colorWarning}
+            filled={true}
+            borderRadius={1}
+            onPress={() => removePress(id)}
+          />
         </View>
       </View>
+    </View>
   );
 };
 

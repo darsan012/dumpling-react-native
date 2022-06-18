@@ -5,48 +5,44 @@ import Header from '../../components/Headers';
 import chilly from '../../assets/chillyMomo.jpg';
 import {Constants} from '../../constants/Constants';
 import ButtonComponent from '../../components/ButtonComponent';
+import {useSelector} from 'react-redux';
 
 const CartScreen = ({navigation}) => {
+  const {cart, totalAmount} = useSelector(state => state.cart);
+
   const handlePress = () => {
-    navigation.navigate("Checkout")
-  }
+    navigation.navigate('Checkout');
+  };
   return (
     <ScrollView>
       <Header text="Add to Cart Page" fontSize={30} />
-      <AddToCartCard
-        momoImage={chilly}
-        momoName="Kothey Chicken MOMO"
-        momoPrice={200}
-      />
-      <AddToCartCard
-        momoImage={chilly}
-        momoName="Kothey Chicken MOMO"
-        momoPrice={200}
-      />
-      <AddToCartCard
-        momoImage={chilly}
-        momoName="Kothey Chicken MOMO"
-        momoPrice={200}
-      />
+
+      {cart.map(item => (
+        <AddToCartCard
+          key={item.productId}
+          momoImage={item.hero}
+          momoName={item.name}
+          momoPrice={item.price}
+          id={item.productId}
+        />
+      ))}
+
       <View style={styles.billContainer}>
         <Header text="Bill" fontSize={25} />
         <View>
-          <View style={styles.item}>
-            <Text style={styles.momoName}>Kothey Veg Momo</Text>
-            <Text style={styles.momoPrice}>Rs. 200</Text>
-          </View>
-          <View style={styles.item}>
-            <Text style={styles.momoName}>Kothey Veg Momo</Text>
-            <Text style={styles.momoPrice}>Rs. 200</Text>
-          </View>
-          <View style={styles.item}>
-            <Text style={styles.momoName}>Kothey Veg Momo</Text>
-            <Text style={styles.momoPrice}>Rs. 200</Text>
-          </View>
+          {cart.map(item => (
+            <View style={styles.item}>
+              <Text style={styles.momoName}>{item.name}</Text>
+              <Text style={styles.momoPrice}>
+                Rs. {item.price * item.quantity}
+              </Text>
+            </View>
+          ))}
+
           <View style={styles.totalContainer}>
             <View style={styles.totalPriceWrapper}>
               <Text style={styles.total}>Total</Text>
-              <Text style={styles.totalPrice}>Rs. 800</Text>
+              <Text style={styles.totalPrice}>Rs. {totalAmount}</Text>
             </View>
             <View style={styles.checkoutButton}>
               <ButtonComponent
@@ -109,7 +105,7 @@ const styles = StyleSheet.create({
   checkoutButton: {
     width: 110,
     marginLeft: '37%',
-    marginBottom:20
+    marginBottom: 20,
   },
 });
 

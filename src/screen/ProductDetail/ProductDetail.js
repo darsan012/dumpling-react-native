@@ -1,11 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Image,
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-} from 'react-native';
+import {Image, StyleSheet, View, Text, ScrollView} from 'react-native';
 import {faPlus, faCartArrowDown} from '@fortawesome/free-solid-svg-icons';
 import hero from '../../assets/hero.jpg';
 import Header from '../../components/Headers';
@@ -17,23 +11,22 @@ import {useSelector, useDispatch} from 'react-redux';
 import {addToCart} from '../../store/slices/cartSlice';
 
 const ProductDetail = ({route, navigation}) => {
-  const [cartClick, cartClickSet] = useState(false);
   const [productDetail, productDetailSet] = useState('');
-  const [getProductDetail, response] = useLazyGetSingleProductQuery();
+  const [getProductDetail] = useLazyGetSingleProductQuery();
   const dispatch = useDispatch();
   const {itemId} = route.params;
-  const handleCartClick = (id, name, price, description,hero) => {
-    cartClickSet(true);
-    // dispatch(addToCart({id, name, price, description,hero}));
+  const {cart} = useSelector(state => state.cart);
+
+  const handleCartClick = (id, name, price, description, hero) => {
+    dispatch(addToCart({productId: id, name, price, description, hero}));
   };
   const handlePress = () => {
-    navigation.navigate("Cart")
-  }
+    navigation.navigate('Cart');
+  };
   useEffect(() => {
     getProductDetail(itemId).then(res => productDetailSet(res));
   }, [getProductDetail, itemId]);
 
-  // console.log(productDetail, 'prnfcbh');
   return (
     <ScrollView>
       <View style={styles.cardContainer}>
@@ -50,7 +43,9 @@ const ProductDetail = ({route, navigation}) => {
             </Text>
           </View>
         )}
-        {cartClick && <UpDownButton />}
+        {cart.filter(item => item.productId === itemId).length !== 0 && (
+          <UpDownButton id={itemId} cart={cart} />
+        )}
         <View style={styles.buttonWrapper}>
           <ButtonComponent
             text="Add to Cart"
@@ -122,13 +117,13 @@ const styles = StyleSheet.create({
     color: Constants.color.primaryColor,
     fontSize: 20,
     marginTop: 20,
-    marginBottom:20
+    marginBottom: 20,
   },
   buttonWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginTop: 30,
-    width:390
+    width: 390,
   },
 });
 export default ProductDetail;

@@ -16,10 +16,8 @@ import {Constants} from '../../constants/Constants';
 import FeaturedCard from '../../components/FeaturedCard';
 import chilly from '../../assets/chillyMomo.jpg';
 import {useGetFeaturedProductQuery} from '../../services/productApi';
-// import {useLazyGetAllProductsQuery} from '../services/productApi';
 
 const HomeScreen = ({navigation}) => {
-  // const [getAllProducts, response] = useLazyGetAllProductsQuery();
   const {data, isLoading, error} = useGetFeaturedProductQuery();
   const clickCard = id => {
     navigation.navigate('ProductDetail', {

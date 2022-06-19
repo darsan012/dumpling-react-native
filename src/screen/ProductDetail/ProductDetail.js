@@ -39,7 +39,7 @@ const ProductDetail = ({route, navigation}) => {
   return (
     <ScrollView>
       <View style={styles.cardContainer}>
-        <Header text="Detail about Product" fontSize={30} />
+        <Header text="Detail about Product" fontSize={23} />
         <Image source={itemImage} style={styles.cardImage} />
         {productDetail.length !== 0 && (
           <View style={styles.momoDetails}>
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     width: '98%',
     marginHorizontal: 5,
     marginBottom: 20,
+    borderRadius: 5,
   },
   momoDetails: {
     flexDirection: 'column',
@@ -114,18 +115,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   momoName: {
-    fontSize: 35,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontWeight: '500',
     color: Constants.color.primaryColor,
   },
   momoPrice: {
     marginTop: 15,
-    fontSize: 28,
+    fontSize: 18,
+    fontWeight: '400',
     color: Constants.color.colorSuccess,
   },
   momoDescription: {
     color: Constants.color.primaryColor,
-    fontSize: 20,
+    fontSize: 13,
+    fontWeight: '400',
     marginTop: 20,
     marginBottom: 20,
   },

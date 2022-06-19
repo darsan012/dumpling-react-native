@@ -6,6 +6,7 @@ import {
   StyleSheet,
   FlatList,
   ImageBackground,
+  Alert,
 } from 'react-native';
 import {useLazyGetAllCategoriesQuery} from '../../services/categoryApi';
 import {useLazyGetProductCategoryWiseQuery} from '../../services/productApi';
@@ -14,6 +15,8 @@ import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
 import momo from '../../assets/momo9.jpg';
 import {Images} from '../../constants/Images';
+import {addToCart} from '../../store/slices/cartSlice';
+import {useDispatch} from 'react-redux';
 
 const Categoryscreen = ({navigation}) => {
   const [getAllCategories, response] = useLazyGetAllCategoriesQuery();
@@ -21,6 +24,7 @@ const Categoryscreen = ({navigation}) => {
     useLazyGetProductCategoryWiseQuery();
 
   const [selectedId, setSelectedId] = useState('CG-1027626036322');
+  const dispatch = useDispatch();
 
   //for getting data from the api
   useEffect(() => {
@@ -52,8 +56,22 @@ const Categoryscreen = ({navigation}) => {
       itemStock: stock,
     });
   };
-  const clickCart = () => {
-    navigation.navigate('Cart');
+
+  const handleCartClick = (id, name, price, description, hero, stock) => {
+    if (stock >= 1) {
+      dispatch(
+        addToCart({
+          productId: id,
+          name,
+          price,
+          description,
+          hero,
+          stockQuantity: stock,
+        }),
+      );
+    } else {
+      Alert.alert('Currently out of stock');
+    }
   };
   const renderItem = ({item}) => {
     const initialState = item.id === selectedId ? true : false;
@@ -112,7 +130,16 @@ const Categoryscreen = ({navigation}) => {
                 handlePress={() =>
                   clickCard(item.productId, Images[index], item.stockQuantity)
                 }
-                handleCartPress={() => clickCart()}
+                handleCartPress={() =>
+                  handleCartClick(
+                    item.productId,
+                    item.name,
+                    item.price,
+                    item.description,
+                    Images[index],
+                    item.stockQuantity,
+                  )
+                }
               />
             )}
             showsVerticalScrollIndicator={false}
@@ -148,6 +175,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgb(233,233,235)',
+    justifyContent: 'center',
   },
   imageContainer: {
     display: 'flex',

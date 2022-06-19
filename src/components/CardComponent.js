@@ -2,21 +2,32 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 
 import momo from '../assets/momo0.jpeg';
-import {BASE_URL} from '../config/configRoute';
 import {Constants} from '../constants/Constants';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const CardComponent = ({item, handlePress, itemImage}) => {
+const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
   // const hostedImage = BASE_URL + item.image;
 
   return (
     <TouchableOpacity style={styles.container} onPress={handlePress}>
-      <View>
-        <Text style={styles.cardHeader}>{item.name}</Text>
+      <View style={{width: 250, marginLeft: 15}}>
+        <Text style={styles.cardHeader} numberOfLines={1}>
+          {item.name}
+        </Text>
         <Text style={styles.cardDescription} numberOfLines={1}>
           {item.description}
         </Text>
         <View style={styles.cardFooter}>
           <Text style={styles.pricing}> Rs. {item.price}</Text>
+          <TouchableOpacity
+            style={{
+              width: 30,
+              marginRight: -8,
+              paddingRight: 5,
+            }}
+            onPress={handleCartPress}>
+            <Icon name="shopping-cart" size={20} />
+          </TouchableOpacity>
         </View>
       </View>
       <View>
@@ -80,6 +91,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 'auto',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
   },
 });

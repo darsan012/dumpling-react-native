@@ -29,7 +29,7 @@ const FeaturedCard = ({
             <Text style={styles.momoPrice}>Rs. {momoPrice}</Text>
           </View>
           <Text style={styles.momoDescription} numberOfLines={1}>
-            {momoDescription}{' '}
+            {momoDescription}
           </Text>
         </View>
       </View>
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     marginHorizontal: 5,
+    borderRadius: 5,
   },
   momoDetails: {
     flexDirection: 'column',
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
   textContainer: {
     marginHorizontal: 20,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
   },
   momoName: {
     maxWidth: 200,

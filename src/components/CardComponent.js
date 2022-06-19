@@ -6,7 +6,7 @@ import momo from '../assets/momo0.jpeg';
 import {BASE_URL} from '../config/configRoute';
 import {Constants} from '../constants/Constants';
 
-const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
+const CardComponent = ({item, handlePress, itemImage}) => {
   const hostedImage = BASE_URL + item.image;
 
   return (
@@ -16,7 +16,7 @@ const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
         <Text style={styles.cardDescription}>{item.description}</Text>
         <View style={styles.cardFooter}>
           <Text style={styles.pricing}>Rs. {item.price}</Text>
-          <TouchableOpacity onPress={handleCartPress}>
+          <TouchableOpacity onPress={handlePress}>
             <Icon name="cart-plus" size={20} color="#3d3d3d" />
           </TouchableOpacity>
         </View>

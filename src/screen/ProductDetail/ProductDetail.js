@@ -56,7 +56,7 @@ const ProductDetail = ({route, navigation}) => {
           <UpDownButton id={itemId} cart={cart} />
         )}
         <View style={styles.buttonWrapper}>
-          {productDetail.data.data && (
+          {productDetail.data && (
             <ButtonComponent
               text="Add to Cart"
               color={Constants.color.colorWarning}

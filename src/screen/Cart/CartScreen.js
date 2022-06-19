@@ -2,7 +2,6 @@ import React from 'react';
 import {ScrollView, Text, StyleSheet, View} from 'react-native';
 import AddToCartCard from '../../components/AddToCartCard';
 import Header from '../../components/Headers';
-import chilly from '../../assets/chillyMomo.jpg';
 import {Constants} from '../../constants/Constants';
 import ButtonComponent from '../../components/ButtonComponent';
 import {useSelector} from 'react-redux';

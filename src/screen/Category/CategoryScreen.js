@@ -6,7 +6,6 @@ import {
   StyleSheet,
   FlatList,
   ImageBackground,
-  Alert,
 } from 'react-native';
 import {useLazyGetAllCategoriesQuery} from '../../services/categoryApi';
 import {useLazyGetProductCategoryWiseQuery} from '../../services/productApi';
@@ -45,7 +44,7 @@ const Categoryscreen = ({navigation}) => {
         console.log(error, 'error');
       }
     })();
-  }, [selectedId, getProductCategoryWise]);
+  }, [selectedId, dispatch]);
 
   const productData = getResponse.data && getResponse.data.data;
 
@@ -58,21 +57,16 @@ const Categoryscreen = ({navigation}) => {
   };
 
   const handleCartClick = (id, name, price, description, hero, stock) => {
-    if (stock >= 1) {
-      dispatch(
-        addToCart({
-          productId: id,
-          name,
-          price,
-          description,
-          hero,
-          stockQuantity: stock,
-        }),
-      );
-      Alert.alert('Successfully added to the cart.');
-    } else {
-      Alert.alert('Currently out of stock');
-    }
+    dispatch(
+      addToCart({
+        productId: id,
+        name,
+        price,
+        description,
+        hero,
+        stockQuantity: stock,
+      }),
+    );
   };
   const renderItem = ({item}) => {
     const initialState = item.id === selectedId ? true : false;
@@ -84,6 +78,7 @@ const Categoryscreen = ({navigation}) => {
       />
     );
   };
+
   return (
     <SafeAreaView>
       <View style={styles.homeContainer}>
@@ -118,6 +113,7 @@ const Categoryscreen = ({navigation}) => {
               data={response.data.data}
               renderItem={renderItem}
               keyExtractor={item => item.id}
+              removeClippedSubviews={true}
             />
           )}
         </View>

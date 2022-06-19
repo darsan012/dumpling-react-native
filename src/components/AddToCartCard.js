@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     elevation: 10,
     backgroundColor: 'white',
     borderRadius: 6,
-    // padding: 5,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',

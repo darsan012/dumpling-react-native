@@ -6,8 +6,6 @@ import {Constants} from '../constants/Constants';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
-  // const hostedImage = BASE_URL + item.image;
-
   return (
     <TouchableOpacity style={styles.container} onPress={handlePress}>
       <View style={{width: 250, marginLeft: 15}}>
@@ -34,17 +32,15 @@ const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
               width: 30,
             }}
             onPress={handleCartPress}>
-            <Icon name="shopping-cart" size={20} />
+            <Icon name="shopping-cart" size={20} color={'#3d3d3d'} />
           </TouchableOpacity>
         </View>
       </View>
-      <View>
-        <Image
-          source={itemImage}
-          defaultSource={momo}
-          style={styles.imageStyle}
-        />
-      </View>
+      <Image
+        source={itemImage}
+        defaultSource={momo}
+        style={styles.imageStyle}
+      />
     </TouchableOpacity>
   );
 };

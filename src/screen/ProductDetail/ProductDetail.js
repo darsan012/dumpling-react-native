@@ -56,23 +56,25 @@ const ProductDetail = ({route, navigation}) => {
           <UpDownButton id={itemId} cart={cart} />
         )}
         <View style={styles.buttonWrapper}>
-          <ButtonComponent
-            text="Add to Cart"
-            color={Constants.color.colorWarning}
-            filled={true}
-            iconName={faPlus}
-            borderRadius={8}
-            onPress={() =>
-              handleCartClick(
-                itemId,
-                productDetail.data.data.name,
-                productDetail.data.data.price,
-                productDetail.data.data.description,
-                hero,
-                productDetail.data.data.stockQuantity,
-              )
-            }
-          />
+          {productDetail.data.data && (
+            <ButtonComponent
+              text="Add to Cart"
+              color={Constants.color.colorWarning}
+              filled={true}
+              iconName={faPlus}
+              borderRadius={8}
+              onPress={() =>
+                handleCartClick(
+                  itemId,
+                  productDetail.data.data.name,
+                  productDetail.data.data.price,
+                  productDetail.data.data.description,
+                  hero,
+                  productDetail.data.data.stockQuantity,
+                )
+              }
+            />
+          )}
           <ButtonComponent
             text="Buy Now"
             color={Constants.color.colorSuccess}

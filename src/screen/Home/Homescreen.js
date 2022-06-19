@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 
 import logo from '../../assets/logo.png';
-// import hero from '../../assets/hero.jpg';
 import hero from '../../assets/momo2.jpg';
 import {Constants} from '../../constants/Constants';
 import FeaturedCard from '../../components/FeaturedCard';

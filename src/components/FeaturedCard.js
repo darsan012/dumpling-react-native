@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
   textContainer: {
     display: 'flex',
     flexDirection: 'column',
-    // alignItems: 'flex-start',
     paddingLeft: 10,
   },
   textHeader: {

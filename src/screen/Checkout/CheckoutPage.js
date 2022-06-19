@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, ToastAndroid} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ButtonComponent from '../../components/ButtonComponent';
 import Header from '../../components/Headers';
 import {Constants} from '../../constants/Constants';
 import {usePostFormMutation} from '../../services/cartApi';
+import { clearCart } from '../../store/slices/cartSlice';
 
 const CheckoutScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [number, setNumber] = useState('');
   const [address, setAddress] = useState('');
+  const dispatch = useDispatch();
 
   const [nameErr, setNameErr] = useState({});
   const [emailErr, setEmailErr] = useState({});
@@ -59,6 +61,7 @@ const CheckoutScreen = () => {
           response.error &&
             ToastAndroid.show('Error submitting form !', ToastAndroid.SHORT);
           console.log(value, 'value');
+          dispatch(clearCart());
           setName('');
           setEmail('');
           setAddress('');

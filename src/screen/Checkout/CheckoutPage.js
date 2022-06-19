@@ -51,7 +51,7 @@ const CheckoutScreen = () => {
             },
           );
           console.log('res', response);
-          response.success &&
+          response.data &&
             ToastAndroid.show(
               'Form Submitted successfully !',
               ToastAndroid.SHORT,

@@ -12,7 +12,7 @@ import {useLazyGetProductCategoryWiseQuery} from '../../services/productApi';
 
 import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
-import momo from '../../assets/momo2.jpg';
+import momo from '../../assets/momo9.jpg';
 import {Images} from '../../constants/Images';
 
 const Categoryscreen = ({navigation}) => {
@@ -52,7 +52,6 @@ const Categoryscreen = ({navigation}) => {
       itemStock: stock,
     });
   };
-
   const clickCart = () => {
     navigation.navigate('Cart');
   };
@@ -92,6 +91,7 @@ const Categoryscreen = ({navigation}) => {
           Menu
         </Text>
         <View style={styles.topScrollBar}>
+          {!response.data && <Text style={{color: 'black'}}>Loading....</Text>}
           {response.data && (
             <FlatList
               horizontal
@@ -101,7 +101,6 @@ const Categoryscreen = ({navigation}) => {
               keyExtractor={item => item.id}
             />
           )}
-          {!response.data && <Text style={{color: 'black'}}>Loading....</Text>}
         </View>
         {productData && (
           <FlatList

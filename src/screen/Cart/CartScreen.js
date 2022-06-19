@@ -82,6 +82,8 @@ const styles = StyleSheet.create({
   momoName: {
     color: Constants.color.primaryColor,
     fontSize: 18,
+    color: 'rgb(0,0,0)',
+    fontWeight: '500',
   },
   momoPrice: {
     color: Constants.color.primaryColor,
@@ -97,12 +99,12 @@ const styles = StyleSheet.create({
   },
   total: {
     color: Constants.color.primaryColor,
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   totalPrice: {
     color: Constants.color.primaryColor,
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   checkoutButton: {

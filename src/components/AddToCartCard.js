@@ -11,7 +11,6 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import {Constants} from '../constants/Constants';
 import {removeFromCart} from '../store/slices/cartSlice';
-import ButtonComponent from './ButtonComponent';
 import UpDownButton from './UpDownButton';
 import IconComponent from './IconComponent';
 import {faMultiply} from '@fortawesome/free-solid-svg-icons';
@@ -69,13 +68,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    height: 100,
+    height: 80,
   },
   cardImage: {
-    height: 90,
-    width: 90,
+    height: 70,
+    width: 80,
     borderRadius: 5,
-    marginLeft: -5,
+    marginLeft: -10,
   },
   momoDetails: {
     flexDirection: 'column',
@@ -85,12 +84,13 @@ const styles = StyleSheet.create({
   },
 
   momoName: {
-    maxWidth: 60,
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: Constants.color.primaryColor,
+    maxWidth: 90,
+    fontSize: 18,
+    color: 'rgb(0,0,0)',
+    fontWeight: '500',
   },
   momoPrice: {
+    fontWeight: '400',
     fontSize: 15,
     color: Constants.color.colorSuccess,
   },

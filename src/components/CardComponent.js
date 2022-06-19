@@ -68,9 +68,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '400',
     lineHeight: 20,
+    width: 200,
   },
   pricing: {
-    color: 'rgb(0,0,0)',
     fontWeight: '400',
     fontSize: 15,
     paddingRight: 170,

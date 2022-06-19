@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '400',
     lineHeight: 20,
+    width: 200,
   },
 });
 

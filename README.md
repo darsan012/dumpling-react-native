@@ -15,6 +15,10 @@ This project is mobile app for Dumpling project
     -@reduxjs/toolkit,
     -react-redux,
     -@react-navigation/native-stack
+    -react-native-bootsplash
+    -react-navigation/bottom-tabs
+    -fortawesome/free-solid-svg-icons
+    
 ```
 
 ## Available Scripts

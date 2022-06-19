@@ -14,11 +14,20 @@ const ProductDetail = ({route, navigation}) => {
   const [productDetail, productDetailSet] = useState('');
   const [getProductDetail] = useLazyGetSingleProductQuery();
   const dispatch = useDispatch();
-  const {itemId,itemImage} = route.params;
+  const {itemId, itemImage} = route.params;
   const {cart} = useSelector(state => state.cart);
 
-  const handleCartClick = (id, name, price, description, hero) => {
-    dispatch(addToCart({productId: id, name, price, description, hero}));
+  const handleCartClick = (id, name, price, description, hero, stock) => {
+    dispatch(
+      addToCart({
+        productId: id,
+        name,
+        price,
+        description,
+        hero,
+        stockQuantity: stock,
+      }),
+    );
   };
   const handlePress = () => {
     navigation.navigate('Cart');
@@ -60,6 +69,7 @@ const ProductDetail = ({route, navigation}) => {
                 productDetail.data.data.price,
                 productDetail.data.data.description,
                 hero,
+                productDetail.data.data.stockQuantity,
               )
             }
           />

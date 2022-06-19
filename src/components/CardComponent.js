@@ -18,12 +18,20 @@ const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
           {item.description}
         </Text>
         <View style={styles.cardFooter}>
-          <Text style={styles.pricing}> Rs. {item.price}</Text>
+          <View
+            style={{
+              width: 170,
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <Text style={styles.pricing}> Rs. {item.price}</Text>
+
+            <Text style={styles.pricing}>Stock: {item.stockQuantity}</Text>
+          </View>
           <TouchableOpacity
             style={{
               width: 30,
-              marginRight: -8,
-              paddingRight: 5,
             }}
             onPress={handleCartPress}>
             <Icon name="shopping-cart" size={20} />
@@ -80,7 +88,7 @@ const styles = StyleSheet.create({
   pricing: {
     fontWeight: '400',
     fontSize: 15,
-    paddingRight: 170,
+    paddingRight: 20,
     color: Constants.color.colorSuccess,
   },
   imageStyle: {

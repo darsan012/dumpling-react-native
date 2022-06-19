@@ -22,6 +22,7 @@ export const cartSlice = createSlice({
       });
 
       if (hasItem) {
+        console.log(hasItem);
         state.cart[index].quantity += 1;
         state.totalQuantity++;
         state.totalAmount += state.cart[index].price;

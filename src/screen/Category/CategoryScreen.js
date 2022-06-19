@@ -52,6 +52,9 @@ const Categoryscreen = ({navigation}) => {
     });
   };
 
+  const clickCart = () => {
+    navigation.navigate('Cart');
+  };
   const renderItem = ({item}) => {
     const initialState = item.id === selectedId ? true : false;
     return (
@@ -107,6 +110,7 @@ const Categoryscreen = ({navigation}) => {
                 item={item}
                 itemImage={Images[index]}
                 handlePress={() => clickCard(item.productId, Images[index])}
+                handleCartPress={() => clickCart()}
               />
             )}
             showsVerticalScrollIndicator={false}

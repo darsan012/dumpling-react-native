@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -12,7 +6,7 @@ import momo from '../assets/momo0.jpeg';
 import {BASE_URL} from '../config/configRoute';
 import {Constants} from '../constants/Constants';
 
-const CardComponent = ({item, handlePress, itemImage}) => {
+const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
   const hostedImage = BASE_URL + item.image;
 
   return (
@@ -22,7 +16,7 @@ const CardComponent = ({item, handlePress, itemImage}) => {
         <Text style={styles.cardDescription}>{item.description}</Text>
         <View style={styles.cardFooter}>
           <Text style={styles.pricing}>Rs. {item.price}</Text>
-          <TouchableOpacity onPress={handlePress}>
+          <TouchableOpacity onPress={handleCartPress}>
             <Icon name="cart-plus" size={20} color="#3d3d3d" />
           </TouchableOpacity>
         </View>

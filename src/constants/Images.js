@@ -11,7 +11,6 @@ import chilly from '../assets/chillyMomo.jpg';
 import hero from '../assets/hero.jpg';
 
 export const Images = [
-  chilly,
   momo2,
   momo3,
   momo7,

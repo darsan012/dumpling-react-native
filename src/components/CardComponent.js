@@ -13,7 +13,9 @@ const CardComponent = ({item, handlePress, itemImage}) => {
     <TouchableOpacity style={styles.container} onPress={handlePress}>
       <View>
         <Text style={styles.cardHeader}>{item.name}</Text>
-        <Text style={styles.cardDescription}>{item.description}</Text>
+        <Text style={styles.cardDescription} numberOfLines={1}>
+          {item.description}
+        </Text>
         <View style={styles.cardFooter}>
           <Text style={styles.pricing}>Rs. {item.price}</Text>
           <TouchableOpacity onPress={handlePress}>
@@ -60,6 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'rgb(0,0,0)',
     fontWeight: '500',
+    paddingTop: 3,
   },
   cardDescription: {
     fontSize: 13,
@@ -83,5 +86,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingLeft: 3,
   },
 });

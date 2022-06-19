@@ -13,6 +13,8 @@ import {Constants} from '../constants/Constants';
 import {removeFromCart} from '../store/slices/cartSlice';
 import ButtonComponent from './ButtonComponent';
 import UpDownButton from './UpDownButton';
+import IconComponent from './IconComponent';
+import {faMultiply} from '@fortawesome/free-solid-svg-icons';
 
 const AddToCartCard = ({momoImage, momoName, momoPrice, id}) => {
   const {cart} = useSelector(state => state.cart);
@@ -29,20 +31,25 @@ const AddToCartCard = ({momoImage, momoName, momoPrice, id}) => {
         </Text>
         <Text style={styles.momoPrice}>Rs. {momoPrice}</Text>
       </View>
+
       <View style={styles.button}>
+        <TouchableOpacity
+          onPress={() => removePress(id)}
+          style={{
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
+            marginTop: -21,
+            marginRight: -20,
+            padding: 6,
+            borderRadius: 20,
+            backgroundColor: '#3d3d3d',
+          }}>
+          <IconComponent iconName={faMultiply} size={15} color="white" />
+        </TouchableOpacity>
         <View style={styles.upDownWrapper}>
           {cart.filter(item => item.productId === id).length !== 0 && (
             <UpDownButton id={id} cart={cart} />
           )}
-        </View>
-        <View style={styles.buttonWrapper}>
-          <ButtonComponent
-            text="Remove"
-            color={Constants.color.colorWarning}
-            filled={true}
-            borderRadius={1}
-            onPress={() => removePress(id)}
-          />
         </View>
       </View>
     </View>
@@ -53,20 +60,22 @@ const styles = StyleSheet.create({
   cardContainer: {
     width: '92%',
     marginVertical: 10,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     shadowColor: 'black',
     elevation: 10,
     backgroundColor: 'white',
     borderRadius: 6,
-    padding: 10,
+    // padding: 5,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    overflow: 'hidden',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    height: 100,
   },
   cardImage: {
-    height: 112,
-    width: 105,
-    marginHorizontal: 5,
+    height: 90,
+    width: 90,
+    borderRadius: 5,
+    marginLeft: -5,
   },
   momoDetails: {
     flexDirection: 'column',
@@ -87,6 +96,9 @@ const styles = StyleSheet.create({
   },
   button: {
     marginLeft: 30,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
   upDownWrapper: {
     height: 46,

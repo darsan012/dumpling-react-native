@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     color: 'black',
     borderRadius: 1,
     marginHorizontal: 10,
+    textAlign: 'center',
   },
   buttonWrapper: {
     flexDirection: 'row',

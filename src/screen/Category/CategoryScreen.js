@@ -45,10 +45,10 @@ const Categoryscreen = ({navigation}) => {
 
   const productData = getResponse.data && getResponse.data.data;
 
-  const clickCard = (id,img) => {
+  const clickCard = (id, img) => {
     navigation.navigate('ProductDetail', {
       itemId: id,
-      itemImage:img
+      itemImage: img,
     });
   };
 
@@ -97,6 +97,7 @@ const Categoryscreen = ({navigation}) => {
               keyExtractor={item => item.id}
             />
           )}
+          {!response.data && <Text style={{color: 'black'}}>Loading....</Text>}
         </View>
         {productData && (
           <FlatList
@@ -105,7 +106,7 @@ const Categoryscreen = ({navigation}) => {
               <CardComponent
                 item={item}
                 itemImage={Images[index]}
-                handlePress={() => clickCard(item.productId,Images[index])}
+                handlePress={() => clickCard(item.productId, Images[index])}
               />
             )}
             showsVerticalScrollIndicator={false}

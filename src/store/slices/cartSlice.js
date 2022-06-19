@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {Alert} from 'react-native';
 
 const initialState = {
   cart: [],
@@ -22,14 +23,25 @@ export const cartSlice = createSlice({
       });
 
       if (hasItem) {
-        console.log(hasItem);
-        state.cart[index].quantity += 1;
-        state.totalQuantity++;
-        state.totalAmount += state.cart[index].price;
+        if (state.cart[index].stockQuantity >= state.cart[index].quantity + 1) {
+          state.cart[index].quantity += 1;
+          state.totalQuantity++;
+          state.totalAmount += state.cart[index].price;
+        } else {
+          Alert.alert(
+            'Sorry your order size exceed our stock size, please forgive us!!',
+          );
+        }
       } else {
-        state.cart = [...state.cart, {...action.payload, quantity: 1}];
-        state.totalQuantity++;
-        state.totalAmount += action.payload.price;
+        if (action.payload.stockQuantity >= 1) {
+          state.cart = [...state.cart, {...action.payload, quantity: 1}];
+          state.totalQuantity++;
+          state.totalAmount += action.payload.price;
+        } else {
+          Alert.alert(
+            'Sorry your order size exceed our stock size, please forgive us!!',
+          );
+        }
       }
     },
     removeFromCart: (state, action) => {
@@ -44,26 +56,31 @@ export const cartSlice = createSlice({
       });
     },
 
-    clearCart: (state, action) => {
-      state.cart = [];
-      state.totalQuantity = 0;
-      state.totalAmount = 0;
-    },
-
     adjustQuantity: (state, action) => {
       state.cart = [
         ...state.cart
-
           .map((item, i) => {
-            let temp = !parseInt(action.payload.quantity)
-              ? item.quantity
-              : parseInt(action.payload.quantity);
             if (item.productId === action.payload.productId) {
+              let temp = item.quantity;
+              if (parseInt(action.payload.quantity) != NaN) {
+                if (item.stockQuantity >= parseInt(action.payload.quantity)) {
+                  temp = parseInt(action.payload.quantity);
+                } else {
+                  Alert.alert(
+                    'Sorry your order size exceed our stock size, please forgive us!!',
+                  );
+                  temp = 0;
+                }
+              } else {
+                Alert.alert(
+                  'Sorry your order size exceed our stock size, please forgive us!!',
+                );
+                temp = 0;
+              }
               state.totalQuantity -= item.quantity;
               state.totalQuantity += temp;
-              state.totalAmount +=
-                temp * parseFloat(item.price) -
-                parseInt(item.quantity) * parseFloat(item.price);
+              state.totalAmount -= item.quantity * parseFloat(item.price);
+              state.totalAmount += temp * parseFloat(item.price);
               return {...item, quantity: temp};
             } else {
               return {...item};
@@ -78,10 +95,16 @@ export const cartSlice = createSlice({
         ...state.cart
           .map((item, i) => {
             if (item.productId === action.payload.productId) {
-              state.totalQuantity += 1;
-              state.totalAmount += item.price;
-
-              return {...item, quantity: item.quantity + 1};
+              if (item.stockQuantity >= item.quantity + 1) {
+                state.totalQuantity += 1;
+                state.totalAmount += item.price;
+                return {...item, quantity: item.quantity + 1};
+              } else {
+                Alert.alert(
+                  'Sorry your order size exceed our stock size, please forgive us!!',
+                );
+                return {...item};
+              }
             } else {
               return {...item};
             }
@@ -107,16 +130,22 @@ export const cartSlice = createSlice({
           .filter(item => !(item.quantity < 1)),
       ];
     },
+
+    clearCart: state => {
+      state.cart = [];
+      state.totalAmount = 0;
+      state.totalQuantity = 0;
+    },
   },
 });
 
 export const {
   addToCart,
   removeFromCart,
-  clearCart,
   adjustQuantity,
   incrementQuantity,
   decrementQuantity,
+  clearCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -12,7 +12,7 @@ const CartScreen = ({navigation}) => {
   const {cart, totalAmount} = useSelector(state => state.cart);
 
   const handlePress = () => {
-    navigation.navigate('Checkout');
+    cart.length !== 0 && navigation.navigate('Checkout');
   };
   return (
     <ScrollView>

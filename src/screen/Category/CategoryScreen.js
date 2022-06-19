@@ -69,6 +69,7 @@ const Categoryscreen = ({navigation}) => {
           stockQuantity: stock,
         }),
       );
+      Alert.alert('Successfully added to the cart.');
     } else {
       Alert.alert('Currently out of stock');
     }

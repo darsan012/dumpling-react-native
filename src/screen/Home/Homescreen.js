@@ -20,10 +20,10 @@ import {Images} from '../../constants/Images';
 
 const HomeScreen = ({navigation}) => {
   const {data, isLoading, error} = useGetFeaturedProductQuery();
-  const clickCard = (id,img) => {
+  const clickCard = (id, img) => {
     navigation.navigate('ProductDetail', {
       itemId: id,
-      itemImage:img
+      itemImage: img,
     });
   };
   return (
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   hero: {
-    height: 300,
+    height: 250,
     width: '100%',
   },
   logoView: {

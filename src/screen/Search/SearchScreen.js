@@ -1,11 +1,8 @@
 import React, {useState} from 'react';
 import {ScrollView, Text, StyleSheet, View} from 'react-native';
 import Header from '../../components/Headers';
-import IconComponent from '../../components/IconComponent';
 import Input from '../../components/Input';
-import {faFilter} from '@fortawesome/free-solid-svg-icons';
 import FeaturedCard from '../../components/FeaturedCard';
-import chilly from '../../assets/chillyMomo.jpg';
 import {useGetAllProductsQuery} from '../../services/productApi';
 import {Images} from '../../constants/Images';
 
@@ -33,7 +30,7 @@ const SearchScreen = ({navigation}) => {
   return (
     <ScrollView>
       <View style={{alignItems: 'center'}}>
-        <Header text="Find your favorite MOMO" fontSize={25} />
+        <Header text="Find your favorite MOMO" fontSize={23} />
         <View style={styles.searchWrapper}>
           <View style={styles.searchBar}>
             <Input
@@ -42,7 +39,6 @@ const SearchScreen = ({navigation}) => {
               value={query}
             />
           </View>
-          {/* <IconComponent iconName={faFilter} size={25} /> */}
         </View>
         {isLoading && <Text style={{color: 'black'}}>Loading....</Text>}
         {error && <Text style={{color: 'black'}}>Error....</Text>}

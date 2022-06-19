@@ -18,20 +18,22 @@ const FeaturedCard = ({
   handlePress,
 }) => {
   return (
-    <TouchableOpacity onPress={handlePress}>
-      <View style={styles.cardContainer}>
-        <Image source={momoImage} style={styles.cardImage} />
-        <View style={styles.momoDetails}>
-          <View style={styles.textContainer}>
-            <Text style={styles.momoName} numberOfLines={1}>
+    <TouchableOpacity onPress={handlePress} style={styles.cardContainer}>
+      <Image source={momoImage} style={styles.cardImage} />
+      <View style={styles.textContainer}>
+        <View style={styles.textHeader}>
+          <View style={{width: 160}}>
+            <Text numberOfLines={1} style={styles.momoName}>
               {momoName}
             </Text>
+          </View>
+          <View style={{marginLeft: 30}}>
             <Text style={styles.momoPrice}>Rs. {momoPrice}</Text>
           </View>
-          <Text style={styles.momoDescription} numberOfLines={1}>
-            {momoDescription}
-          </Text>
         </View>
+        <Text style={styles.momoDescription} numberOfLines={1}>
+          {momoDescription}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -39,49 +41,50 @@ const FeaturedCard = ({
 
 const styles = StyleSheet.create({
   cardContainer: {
-    width: '92%',
     marginVertical: 10,
-    marginHorizontal: 20,
     shadowColor: 'black',
     elevation: 10,
     backgroundColor: 'white',
     borderRadius: 6,
-    padding: 10,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    alignItems: 'center',
+    height: 90,
+    width: 360,
   },
   cardImage: {
     height: 80,
-    width: 80,
-    marginHorizontal: 5,
+    width: 90,
     borderRadius: 5,
-  },
-  momoDetails: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    flex: 1,
+    marginLeft: 5,
   },
   textContainer: {
-    marginHorizontal: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    // alignItems: 'flex-start',
+    paddingLeft: 10,
+  },
+  textHeader: {
+    display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
+    paddingBottom: 10,
   },
   momoName: {
-    maxWidth: 200,
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingRight: 20,
-    color: Constants.color.primaryColor,
+    fontSize: 18,
+    color: 'rgb(0,0,0)',
+    fontWeight: '500',
   },
   momoPrice: {
-    fontSize: 18,
+    fontSize: 15,
     color: Constants.color.colorSuccess,
+    fontWeight: '400',
   },
   momoDescription: {
-    color: Constants.color.primaryColor,
-    marginHorizontal: 20,
-    marginTop: 20,
-    maxWidth: 230,
+    fontSize: 13,
+    fontWeight: '400',
+    lineHeight: 20,
   },
 });
 

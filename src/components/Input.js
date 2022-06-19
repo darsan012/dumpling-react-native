@@ -3,12 +3,7 @@ import React, {useState} from 'react';
 import IconComponent from './IconComponent';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 
-const Input = ({
-  secureTextEntry,
-  placeholder,
-  value,
-  searchQueryHandler,
-}) => {
+const Input = ({secureTextEntry, placeholder, value, searchQueryHandler}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const changeHandler = () => {
     searchQueryHandler(searchQuery.trim());
@@ -44,6 +39,7 @@ const styles = StyleSheet.create({
     color: 'black',
     borderRadius: 15,
     padding: 7,
+    paddingLeft: 15,
     position: 'relative',
   },
   icon: {

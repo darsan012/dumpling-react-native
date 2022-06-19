@@ -17,7 +17,7 @@ const CartScreen = ({navigation}) => {
   return (
     <ScrollView>
       <View style={{alignItems: 'center'}}>
-        <Header text="Add to Cart Page" fontSize={30} />
+        <Header text="Add to Cart Page" fontSize={23} />
 
         {cart.map((item, i) => (
           <AddToCartCard
@@ -30,7 +30,7 @@ const CartScreen = ({navigation}) => {
         ))}
 
         <View style={styles.billContainer}>
-          <Header text="Bill" fontSize={25} />
+          <Header text="Bill" fontSize={20} />
           <View>
             {cart.map(item => (
               <View style={styles.item} key={item.productId}>
@@ -51,7 +51,7 @@ const CartScreen = ({navigation}) => {
                   text="Checkout"
                   color={Constants.color.colorSuccess}
                   filled={true}
-                  borderRadius={1}
+                  borderRadius={3}
                   onPress={handlePress}
                 />
               </View>

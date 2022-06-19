@@ -17,10 +17,10 @@ const CardComponent = ({item, handlePress, itemImage}) => {
           {item.description}
         </Text>
         <View style={styles.cardFooter}>
-          <Text style={styles.pricing}>Rs. {item.price}</Text>
-          <TouchableOpacity onPress={handlePress}>
+          <Text style={styles.pricing}> Rs. {item.price}</Text>
+          {/* <TouchableOpacity onPress={handlePress}>
             <Icon name="cart-plus" size={20} color="#3d3d3d" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <View>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingLeft: 10,
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'rgb(251,251,251)',
@@ -82,10 +82,8 @@ const styles = StyleSheet.create({
   },
   cardFooter: {
     flex: 1,
-    width: 240,
+    width: 'auto',
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingLeft: 3,
+    justifyContent: 'space-evenly',
   },
 });

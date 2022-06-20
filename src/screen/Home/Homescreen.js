@@ -37,9 +37,9 @@ const HomeScreen = ({navigation}) => {
               height: 200,
               resizeMode: 'cover',
             }}>
-            <View style={styles.logoView}>
+            {/* <View style={styles.logoView}>
               <Image source={logo} style={styles.logo} />
-            </View>
+            </View> */}
           </ImageBackground>
           <View style={{paddingBottom: 15, marginTop: -30}}>
             <Text style={styles.featuredText}>Featured Items</Text>

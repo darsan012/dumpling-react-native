@@ -28,7 +28,7 @@ const AddToCartCard = ({momoImage, momoName, momoPrice, id}) => {
         <Text style={styles.momoName} numberOfLines={1}>
           {momoName}
         </Text>
-        <Text style={styles.momoPrice}>Rs. {momoPrice}</Text>
+        <Text style={styles.momoPrice}> Rs. {momoPrice}</Text>
       </View>
 
       <View style={styles.button}>
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   momoDetails: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginLeft: 10,
   },
 

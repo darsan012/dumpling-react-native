@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 20,
     width: 200,
+    color: Constants.color.colorDefault,
   },
 });
 

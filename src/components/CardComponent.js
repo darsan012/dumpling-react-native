@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 20,
     width: 200,
+    color: '#003532',
   },
   pricing: {
     fontWeight: '400',

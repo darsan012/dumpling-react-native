@@ -126,7 +126,9 @@ const CheckoutScreen = () => {
     <View style={styles.checkoutContainer}>
       <Header text="Checkout" fontSize={25} />
       <View>
-        <Text style={{fontSize: 14, color: 'black'}}>Details</Text>
+        <Text style={{fontSize: 16, fontWeight: '400', color: 'black'}}>
+          Details
+        </Text>
         <View>
           <View style={styles.inputContainer}>
             <Icon
@@ -136,6 +138,7 @@ const CheckoutScreen = () => {
             />
             <TextInput
               placeholder="Name"
+              placeholderTextColor={'#003532'}
               style={styles.input}
               onChangeText={e => setName(e)}
               value={name}
@@ -160,6 +163,7 @@ const CheckoutScreen = () => {
             />
             <TextInput
               placeholder="Phone"
+              placeholderTextColor={'#003532'}
               keyboardType="numeric"
               style={styles.input}
               onChangeText={e => setNumber(e)}
@@ -184,6 +188,7 @@ const CheckoutScreen = () => {
             />
             <TextInput
               placeholder="Email"
+              placeholderTextColor={'#003532'}
               style={styles.input}
               onChangeText={e => setEmail(e)}
               value={email}
@@ -204,6 +209,7 @@ const CheckoutScreen = () => {
             <Icon name="home" size={18} color={Constants.color.colorWarning} />
             <TextInput
               placeholder="Address"
+              placeholderTextColor={'#003532'}
               style={styles.input}
               onChangeText={e => setAddress(e)}
               value={address}
@@ -264,6 +270,7 @@ const styles = StyleSheet.create({
   input: {
     paddingLeft: 15,
     width: '80%',
+    color: '#003532',
   },
   buttonComponent: {
     marginTop: 26,

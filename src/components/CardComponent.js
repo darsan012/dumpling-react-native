@@ -13,7 +13,7 @@ const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
           {item.name}
         </Text>
         <Text style={styles.cardDescription} numberOfLines={1}>
-          {item.description}
+          {/* {item.description} */}
         </Text>
         <View style={styles.cardFooter}>
           <View
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 20,
     width: 200,
-    color: '#003532',
+    color: 'white',
   },
   pricing: {
     fontWeight: '400',

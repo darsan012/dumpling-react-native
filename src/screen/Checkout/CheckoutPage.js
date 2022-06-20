@@ -52,11 +52,11 @@ const CheckoutScreen = () => {
           });
           response.data &&
             ToastAndroid.show(
-              'Form Submitted successfully !',
+              'Order placed successfully !',
               ToastAndroid.SHORT,
             );
           response.error &&
-            ToastAndroid.show('Error submitting form !', ToastAndroid.SHORT);
+            ToastAndroid.show('Error placing order !', ToastAndroid.SHORT);
           dispatch(clearCart());
           setName('');
           setEmail('');

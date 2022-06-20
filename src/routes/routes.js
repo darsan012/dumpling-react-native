@@ -1,6 +1,6 @@
 import CartScreen from '../screen/Cart/CartScreen';
 import CategoryScreen from '../screen/Category/CategoryScreen';
-import HomeScreen from '../screen/Home/HomeScreen';
+import HomeScreen from '../screen/Home/Homescreen';
 import SearchScreen from '../screen/Search/SearchScreen';
 import CheckoutScreen from '../screen/Checkout/CheckoutPage';
 import {

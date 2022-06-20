@@ -2,7 +2,6 @@ import React from 'react';
 import {ScrollView, Text, StyleSheet, View} from 'react-native';
 import AddToCartCard from '../../components/AddToCartCard';
 import Header from '../../components/Headers';
-import chilly from '../../assets/chillyMomo.jpg';
 import {Constants} from '../../constants/Constants';
 import ButtonComponent from '../../components/ButtonComponent';
 import {useSelector} from 'react-redux';
@@ -16,43 +15,45 @@ const CartScreen = ({navigation}) => {
   };
   return (
     <ScrollView>
-      <Header text="Add to Cart Page" fontSize={30} />
+      <View style={{alignItems: 'center'}}>
+        <Header text="Add to Cart Page" fontSize={23} />
 
-      {cart.map((item, i) => (
-        <AddToCartCard
-          key={item.productId}
-          momoImage={Images[i]}
-          momoName={item.name}
-          momoPrice={item.price}
-          id={item.productId}
-        />
-      ))}
+        {cart.map((item, i) => (
+          <AddToCartCard
+            key={item.productId}
+            momoImage={Images[i]}
+            momoName={item.name}
+            momoPrice={item.price}
+            id={item.productId}
+          />
+        ))}
 
-      <View style={styles.billContainer}>
-        <Header text="Bill" fontSize={25} />
-        <View>
-          {cart.map(item => (
-            <View style={styles.item} key={item.productId}>
-              <Text style={styles.momoName}>{item.name}</Text>
-              <Text style={styles.momoPrice}>
-                Rs. {item.price * item.quantity}
-              </Text>
-            </View>
-          ))}
+        <View style={styles.billContainer}>
+          <Header text="Bill" fontSize={20} />
+          <View>
+            {cart.map(item => (
+              <View style={styles.item} key={item.productId}>
+                <Text style={styles.momoName}>{item.name}</Text>
+                <Text style={styles.momoPrice}>
+                  Rs. {item.price * item.quantity}
+                </Text>
+              </View>
+            ))}
 
-          <View style={styles.totalContainer}>
-            <View style={styles.totalPriceWrapper}>
-              <Text style={styles.total}>Total</Text>
-              <Text style={styles.totalPrice}>Rs. {totalAmount}</Text>
-            </View>
-            <View style={styles.checkoutButton}>
-              <ButtonComponent
-                text="Checkout"
-                color={Constants.color.colorSuccess}
-                filled={true}
-                borderRadius={1}
-                onPress={handlePress}
-              />
+            <View style={styles.totalContainer}>
+              <View style={styles.totalPriceWrapper}>
+                <Text style={styles.total}>Total</Text>
+                <Text style={styles.totalPrice}>Rs. {totalAmount}</Text>
+              </View>
+              <View style={styles.checkoutButton}>
+                <ButtonComponent
+                  text="Checkout"
+                  color={Constants.color.colorSuccess}
+                  filled={true}
+                  borderRadius={3}
+                  onPress={handlePress}
+                />
+              </View>
             </View>
           </View>
         </View>
@@ -80,6 +81,8 @@ const styles = StyleSheet.create({
   momoName: {
     color: Constants.color.primaryColor,
     fontSize: 18,
+    color: 'rgb(0,0,0)',
+    fontWeight: '500',
   },
   momoPrice: {
     color: Constants.color.primaryColor,
@@ -95,12 +98,12 @@ const styles = StyleSheet.create({
   },
   total: {
     color: Constants.color.primaryColor,
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   totalPrice: {
     color: Constants.color.primaryColor,
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   checkoutButton: {

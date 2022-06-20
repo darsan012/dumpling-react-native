@@ -8,13 +8,15 @@ const ButtonComponent = ({
   filled = false,
   color = Constants.color.colorDefault,
   iconName,
-    onPress,
-  borderRadius=50
+  onPress,
+  borderRadius = 50,
 }) => {
   return (
     <>
       {filled ? (
-        <TouchableOpacity style={styles.filledButton(color,borderRadius)} onPress={onPress}>
+        <TouchableOpacity
+          style={styles.filledButton(color, borderRadius)}
+          onPress={onPress}>
           <View style={styles.filledView}>
             {iconName && (
               <IconComponent iconName={iconName} size={20} color="white" />
@@ -44,9 +46,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   }),
-  filledButton: (color,borderRadius) => ({
+  filledButton: (color, borderRadius) => ({
     backgroundColor: color,
-    padding: 10,
+    padding: 5,
     borderRadius: borderRadius,
     borderWidth: Constants.color.borderWidth,
     borderColor: color,
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontWeight: 'bold',
-    marginLeft:4
+    marginLeft: 4,
   },
   filledView: {
     flexDirection: 'row',

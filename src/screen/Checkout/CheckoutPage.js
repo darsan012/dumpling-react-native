@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, ToastAndroid} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import ButtonComponent from '../../components/ButtonComponent';
 import Header from '../../components/Headers';
 import {Constants} from '../../constants/Constants';
 import {usePostFormMutation} from '../../services/cartApi';
-import { clearCart } from '../../store/slices/cartSlice';
+import {clearCart} from '../../store/slices/cartSlice';
 
 const CheckoutScreen = () => {
   const [name, setName] = useState('');
@@ -19,7 +19,7 @@ const CheckoutScreen = () => {
   const [emailErr, setEmailErr] = useState({});
   const [numberErr, setNumberErr] = useState({});
   const [addressErr, setAddressErr] = useState({});
-  const cartItems = useSelector((state) => state.cart.cart);
+  const cartItems = useSelector(state => state.cart.cart);
   const [postForm] = usePostFormMutation();
 
   const nameRegex = /^[ a-zA-Z]+$/;
@@ -41,32 +41,27 @@ const CheckoutScreen = () => {
       };
       const setContactInfo = async () => {
         try {
-          const response = await postForm(
-            {
-              orders: [
-                ...cartItems.map(obj => ({
-                  productId: obj.productId,
-                  quantity: obj.quantity,
-                })),
-              ],
-              ...value,
-            },
-          );
-          console.log('res', response);
+          const response = await postForm({
+            orders: [
+              ...cartItems.map(obj => ({
+                productId: obj.productId,
+                quantity: obj.quantity,
+              })),
+            ],
+            ...value,
+          });
           response.data &&
             ToastAndroid.show(
-              'Form Submitted successfully !',
+              'Order placed successfully !',
               ToastAndroid.SHORT,
             );
           response.error &&
-            ToastAndroid.show('Error submitting form !', ToastAndroid.SHORT);
-          console.log(value, 'value');
+            ToastAndroid.show('Error placing order !', ToastAndroid.SHORT);
           dispatch(clearCart());
           setName('');
           setEmail('');
           setAddress('');
           setNumber('');
-          console.log(value);
         } catch (err) {
           console.error(err, 'error');
         }
@@ -127,12 +122,13 @@ const CheckoutScreen = () => {
     return isValid;
   };
 
-  // console.log(name, email, message);
   return (
     <View style={styles.checkoutContainer}>
       <Header text="Checkout" fontSize={25} />
       <View>
-        <Text style={{fontSize: 14, color: 'black'}}>Details</Text>
+        <Text style={{fontSize: 16, fontWeight: '400', color: 'black'}}>
+          Details
+        </Text>
         <View>
           <View style={styles.inputContainer}>
             <Icon
@@ -142,6 +138,7 @@ const CheckoutScreen = () => {
             />
             <TextInput
               placeholder="Name"
+              placeholderTextColor={'#003532'}
               style={styles.input}
               onChangeText={e => setName(e)}
               value={name}
@@ -166,6 +163,7 @@ const CheckoutScreen = () => {
             />
             <TextInput
               placeholder="Phone"
+              placeholderTextColor={'#003532'}
               keyboardType="numeric"
               style={styles.input}
               onChangeText={e => setNumber(e)}
@@ -190,6 +188,7 @@ const CheckoutScreen = () => {
             />
             <TextInput
               placeholder="Email"
+              placeholderTextColor={'#003532'}
               style={styles.input}
               onChangeText={e => setEmail(e)}
               value={email}
@@ -210,6 +209,7 @@ const CheckoutScreen = () => {
             <Icon name="home" size={18} color={Constants.color.colorWarning} />
             <TextInput
               placeholder="Address"
+              placeholderTextColor={'#003532'}
               style={styles.input}
               onChangeText={e => setAddress(e)}
               value={address}
@@ -270,6 +270,7 @@ const styles = StyleSheet.create({
   input: {
     paddingLeft: 15,
     width: '80%',
+    color: '#003532',
   },
   buttonComponent: {
     marginTop: 26,

@@ -1,39 +1,46 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import momo from '../assets/momo0.jpeg';
-import {BASE_URL} from '../config/configRoute';
 import {Constants} from '../constants/Constants';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const CardComponent = ({item, handlePress, itemImage}) => {
-  const hostedImage = BASE_URL + item.image;
-
+const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={handlePress}>
-      <View>
-        <Text style={styles.cardHeader}>{item.name}</Text>
-        <Text style={styles.cardDescription}>{item.description}</Text>
+      <View style={{width: 250, marginLeft: 15}}>
+        <Text style={styles.cardHeader} numberOfLines={1}>
+          {item.name}
+        </Text>
+        <Text style={styles.cardDescription} numberOfLines={1}>
+          {/* {item.description} */}
+        </Text>
         <View style={styles.cardFooter}>
-          <Text style={styles.pricing}>Rs. {item.price}</Text>
-          <TouchableOpacity onPress={handlePress}>
-            <Icon name="cart-plus" size={20} color="#3d3d3d" />
+          <View
+            style={{
+              width: 170,
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <Text style={styles.pricing}> Rs. {item.price}</Text>
+
+            <Text style={styles.pricing}>Stock: {item.stockQuantity}</Text>
+          </View>
+          <TouchableOpacity
+            style={{
+              width: 30,
+            }}
+            onPress={handleCartPress}>
+            <Icon name="shopping-cart" size={20} color={'#3d3d3d'} />
           </TouchableOpacity>
         </View>
       </View>
-      <View>
-        <Image
-          source={itemImage}
-          defaultSource={momo}
-          style={styles.imageStyle}
-        />
-      </View>
+      <Image
+        source={itemImage}
+        defaultSource={momo}
+        style={styles.imageStyle}
+      />
     </TouchableOpacity>
   );
 };
@@ -48,7 +55,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingLeft: 10,
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'rgb(251,251,251)',
@@ -66,17 +73,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'rgb(0,0,0)',
     fontWeight: '500',
+    paddingTop: 3,
   },
   cardDescription: {
     fontSize: 13,
     fontWeight: '400',
     lineHeight: 20,
+    width: 200,
+    color: 'white',
   },
   pricing: {
-    color: 'rgb(0,0,0)',
     fontWeight: '400',
     fontSize: 15,
-    paddingRight: 170,
+    paddingRight: 20,
     color: Constants.color.colorSuccess,
   },
   imageStyle: {
@@ -85,9 +94,8 @@ const styles = StyleSheet.create({
   },
   cardFooter: {
     flex: 1,
-    width: 240,
+    width: 'auto',
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
   },
 });

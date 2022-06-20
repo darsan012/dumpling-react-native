@@ -12,8 +12,10 @@ import {useLazyGetProductCategoryWiseQuery} from '../../services/productApi';
 
 import CardComponent from '../../components/CardComponent';
 import MenuComponent from '../../components/MenuComponent';
-import momo from '../../assets/momo2.jpg';
+import momo from '../../assets/momo9.jpg';
 import {Images} from '../../constants/Images';
+import {addToCart} from '../../store/slices/cartSlice';
+import {useDispatch} from 'react-redux';
 
 const Categoryscreen = ({navigation}) => {
   const [getAllCategories, response] = useLazyGetAllCategoriesQuery();
@@ -21,6 +23,7 @@ const Categoryscreen = ({navigation}) => {
     useLazyGetProductCategoryWiseQuery();
 
   const [selectedId, setSelectedId] = useState('CG-1027626036322');
+  const dispatch = useDispatch();
 
   //for getting data from the api
   useEffect(() => {
@@ -41,17 +44,30 @@ const Categoryscreen = ({navigation}) => {
         console.log(error, 'error');
       }
     })();
-  }, [selectedId, getProductCategoryWise]);
+  }, [selectedId, dispatch]);
 
   const productData = getResponse.data && getResponse.data.data;
 
-  const clickCard = (id,img) => {
+  const clickCard = (id, img, stock) => {
     navigation.navigate('ProductDetail', {
       itemId: id,
-      itemImage:img
+      itemImage: img,
+      itemStock: stock,
     });
   };
 
+  const handleCartClick = (id, name, price, description, hero, stock) => {
+    dispatch(
+      addToCart({
+        productId: id,
+        name,
+        price,
+        description,
+        hero,
+        stockQuantity: stock,
+      }),
+    );
+  };
   const renderItem = ({item}) => {
     const initialState = item.id === selectedId ? true : false;
     return (
@@ -62,6 +78,7 @@ const Categoryscreen = ({navigation}) => {
       />
     );
   };
+
   return (
     <SafeAreaView>
       <View style={styles.homeContainer}>
@@ -88,6 +105,7 @@ const Categoryscreen = ({navigation}) => {
           Menu
         </Text>
         <View style={styles.topScrollBar}>
+          {!response.data && <Text style={{color: 'black'}}>Loading....</Text>}
           {response.data && (
             <FlatList
               horizontal
@@ -95,6 +113,7 @@ const Categoryscreen = ({navigation}) => {
               data={response.data.data}
               renderItem={renderItem}
               keyExtractor={item => item.id}
+              removeClippedSubviews={true}
             />
           )}
         </View>
@@ -105,7 +124,19 @@ const Categoryscreen = ({navigation}) => {
               <CardComponent
                 item={item}
                 itemImage={Images[index]}
-                handlePress={() => clickCard(item.productId,Images[index])}
+                handlePress={() =>
+                  clickCard(item.productId, Images[index], item.stockQuantity)
+                }
+                handleCartPress={() =>
+                  handleCartClick(
+                    item.productId,
+                    item.name,
+                    item.price,
+                    item.description,
+                    Images[index],
+                    item.stockQuantity,
+                  )
+                }
               />
             )}
             showsVerticalScrollIndicator={false}
@@ -141,6 +172,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgb(233,233,235)',
+    justifyContent: 'center',
   },
   imageContainer: {
     display: 'flex',

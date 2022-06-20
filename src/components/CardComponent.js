@@ -8,17 +8,17 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={handlePress}>
-      <View style={{width: 250, marginLeft: 15}}>
+      <View style={{width: '73%'}}>
         <Text style={styles.cardHeader} numberOfLines={1}>
           {item.name}
         </Text>
-        <Text style={styles.cardDescription} numberOfLines={1}>
-          {/* {item.description} */}
-        </Text>
+        {/* <Text style={styles.cardDescription} numberOfLines={1}>
+         {item.description} 
+        </Text> */}
         <View style={styles.cardFooter}>
           <View
             style={{
-              width: 170,
+              width: '35%',
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
@@ -36,11 +36,13 @@ const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <Image
-        source={itemImage}
-        defaultSource={momo}
-        style={styles.imageStyle}
-      />
+      <View style={{width:'25%',overflow:'hidden',borderRadius:5}}>
+        <Image
+          source={itemImage}
+          defaultSource={momo}
+          style={styles.imageStyle}
+        />
+      </View>
     </TouchableOpacity>
   );
 };
@@ -50,11 +52,10 @@ export default CardComponent;
 const styles = StyleSheet.create({
   container: {
     height: 80,
-    width: 360,
-    margin: 5,
+    width: '90%',
+    marginHorizontal: '5%',
     marginVertical: 10,
-    paddingLeft: 10,
-    display: 'flex',
+    padding:5,
     flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
     color: 'rgb(0,0,0)',
     fontWeight: '500',
     paddingTop: 3,
+    marginBottom: 14,
   },
   cardDescription: {
     fontSize: 13,
@@ -89,13 +91,12 @@ const styles = StyleSheet.create({
     color: Constants.color.colorSuccess,
   },
   imageStyle: {
-    height: 80,
-    width: 100,
+    height: '100%',
+    width: 100, 
   },
   cardFooter: {
-    flex: 1,
-    width: 'auto',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width:'100%'
   },
 });

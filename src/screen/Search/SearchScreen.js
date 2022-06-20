@@ -5,6 +5,9 @@ import Input from '../../components/Input';
 import FeaturedCard from '../../components/FeaturedCard';
 import {useGetAllProductsQuery} from '../../services/productApi';
 import {Images} from '../../constants/Images';
+import CardComponent from '../../components/CardComponent';
+import {addToCart} from '../../store/slices/cartSlice';
+import {useDispatch} from 'react-redux';
 
 const filterProduct = (productData, query) => {
   if (query.trim() === '') {
@@ -19,13 +22,27 @@ const filterProduct = (productData, query) => {
 const SearchScreen = ({navigation}) => {
   const {data, isLoading, error} = useGetAllProductsQuery();
   const [query, setQuery] = useState('');
+  const dispatch = useDispatch();
   let filteredItems = [];
+
   data && (filteredItems = filterProduct(data.data, query));
   const clickCard = (id, img) => {
     navigation.navigate('ProductDetail', {
       itemId: id,
       itemImage: img,
     });
+  };
+  const handleCartClick = (id, name, price, description, hero, stock) => {
+    dispatch(
+      addToCart({
+        productId: id,
+        name,
+        price,
+        description,
+        hero,
+        stockQuantity: stock,
+      }),
+    );
   };
   return (
     <ScrollView>
@@ -44,14 +61,33 @@ const SearchScreen = ({navigation}) => {
         {error && <Text style={{color: 'black'}}>Error....</Text>}
         {data &&
           (filterProduct(data.data, query).length !== 0 ? (
-            filterProduct(data.data, query).map((obj, i) => (
-              <FeaturedCard
-                key={obj.productId}
-                momoImage={Images[i]}
-                momoName={obj.name}
-                momoPrice={obj.price}
-                momoDescription={obj.description}
-                handlePress={() => clickCard(obj.productId, Images[i])}
+            filterProduct(data.data, query).map((item, index) => (
+              // <FeaturedCard
+              //   key={obj.productId}
+              //   momoImage={Images[i]}
+              //   momoName={obj.name}
+              //   momoPrice={obj.price}
+              //   momoDescription={obj.description}
+              //   handlePress={() => clickCard(obj.productId, Images[i])}
+              // />
+
+              <CardComponent
+                key={item.productId}
+                item={item}
+                itemImage={Images[index]}
+                handlePress={() =>
+                  clickCard(item.productId, Images[index], item.stockQuantity)
+                }
+                handleCartPress={() =>
+                  handleCartClick(
+                    item.productId,
+                    item.name,
+                    item.price,
+                    item.description,
+                    Images[index],
+                    item.stockQuantity,
+                  )
+                }
               />
             ))
           ) : (

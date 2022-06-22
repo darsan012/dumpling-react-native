@@ -34,8 +34,8 @@ const UpDownButton = ({id, cart}) => {
             ? cart.filter(item => item.productId === id)[0].quantity.toString()
             : '0'
         }
-        onChangeText={value => {
-          dispatch(adjustQuantity({productId: id, quantity: value}));
+        onEndEditing={e => {
+          dispatch(adjustQuantity({productId: id, quantity: e.nativeEvent.text}));
         }}
         placeholderTextColor="black"
       />

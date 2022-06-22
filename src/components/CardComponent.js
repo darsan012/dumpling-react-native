@@ -36,7 +36,7 @@ const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{width:'25%',overflow:'hidden',borderRadius:5}}>
+      <View style={{width: '25%', overflow: 'hidden', borderRadius: 5}}>
         <Image
           source={itemImage}
           defaultSource={momo}
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     width: '90%',
     marginHorizontal: '5%',
     marginVertical: 10,
-    padding:5,
+    padding: 5,
     flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -92,11 +92,11 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     height: '100%',
-    width: 100, 
+    width: 100,
   },
   cardFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width:'100%'
+    width: '100%',
   },
 });

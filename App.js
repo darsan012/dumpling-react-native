@@ -1,10 +1,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { Provider } from 'react-redux';
-import RNBootSplash from "react-native-bootsplash";
+import {Provider} from 'react-redux';
+import RNBootSplash from 'react-native-bootsplash';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import IconComponent from './src/components/IconComponent';
 import screens from './src/routes/routes';
 import {store} from './src/store/store';
 import {useSelector} from 'react-redux';
@@ -15,7 +15,7 @@ const App = () => {
   const Main = () => {
     const {totalQuantity} = useSelector(state => state.cart);
     return (
-      <NavigationContainer onReady={() => RNBootSplash.hide({fade:true})}>
+      <NavigationContainer onReady={() => RNBootSplash.hide({fade: true})}>
         <Tab.Navigator>
           {screens.map(obj => (
             <Tab.Screen
@@ -28,13 +28,7 @@ const App = () => {
 
                   iconSize = focused ? 30 : 27;
 
-                  return (
-                    <IconComponent
-                      iconName={obj.icon}
-                      color={color}
-                      size={iconSize}
-                    />
-                  );
+                  return <Icon name={obj.icon} color={color} size={iconSize} />;
                 },
                 tabBarActiveTintColor: 'black',
                 tabBarInactiveTintColor: 'gray',
@@ -46,9 +40,7 @@ const App = () => {
                 ...(obj.name === 'Checkout'
                   ? {tabBarItemStyle: {display: 'none'}}
                   : {}),
-                ...(obj.badge
-                  ? {tabBarBadge: totalQuantity}
-                  : {}),
+                ...(obj.badge ? {tabBarBadge: totalQuantity} : {}),
               })}
             />
           ))}

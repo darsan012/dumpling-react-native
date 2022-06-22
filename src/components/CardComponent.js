@@ -18,7 +18,7 @@ const CardComponent = ({item, handlePress, handleCartPress, itemImage}) => {
         <View style={styles.cardFooter}>
           <View
             style={{
-              width: '35%',
+              width: '40%',
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',

@@ -10,12 +10,14 @@ const ButtonComponent = ({
   iconName,
   onPress,
   borderRadius = 50,
+  disableButton,
 }) => {
   return (
     <>
       {filled ? (
         <TouchableOpacity
           style={styles.filledButton(color, borderRadius)}
+          disabled={disableButton}
           onPress={onPress}>
           <View style={styles.filledView}>
             {iconName && (

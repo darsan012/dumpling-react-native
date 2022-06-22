@@ -1,7 +1,6 @@
-import {SafeAreaView, TextInput, StyleSheet, View} from 'react-native';
+import {TextInput, StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
-import IconComponent from './IconComponent';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Input = ({secureTextEntry, placeholder, value, searchQueryHandler}) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -24,7 +23,7 @@ const Input = ({secureTextEntry, placeholder, value, searchQueryHandler}) => {
         onBlur={changeHandler}
       />
       <View style={styles.icon}>
-        <IconComponent iconName={faSearch} />
+        <Icon name="search" size={20} />
       </View>
     </>
   );
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: 'absolute',
-    top: '34%',
+    top: '28%',
     right: '5%',
   },
 });

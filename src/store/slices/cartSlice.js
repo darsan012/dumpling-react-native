@@ -27,20 +27,18 @@ export const cartSlice = createSlice({
           state.cart[index].quantity += 1;
           state.totalQuantity++;
           state.totalAmount += state.cart[index].price;
+          Alert.alert('Added sucessfully!!');
         } else {
-          Alert.alert(
-            'Sorry your order size exceed our stock size, please forgive us!!',
-          );
+          Alert.alert('Out of stock!!');
         }
       } else {
         if (action.payload.stockQuantity >= 1) {
           state.cart = [...state.cart, {...action.payload, quantity: 1}];
           state.totalQuantity++;
           state.totalAmount += action.payload.price;
+          Alert.alert('Added sucessfully!!');
         } else {
-          Alert.alert(
-            'Sorry your order size exceed our stock size, please forgive us!!',
-          );
+          Alert.alert('Out of stock!!');
         }
       }
     },

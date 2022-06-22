@@ -21,7 +21,6 @@ const Categoryscreen = ({navigation}) => {
   const [getAllCategories, response] = useLazyGetAllCategoriesQuery();
   const [getProductCategoryWise, getResponse] =
     useLazyGetProductCategoryWiseQuery();
-
   const [selectedId, setSelectedId] = useState('CG-1027626036322');
   const dispatch = useDispatch();
 

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Constants} from '../constants/Constants';
-import IconComponent from './IconComponent';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 const ButtonComponent = ({
@@ -10,17 +11,17 @@ const ButtonComponent = ({
   iconName,
   onPress,
   borderRadius = 50,
+  disableButton,
 }) => {
   return (
     <>
       {filled ? (
         <TouchableOpacity
           style={styles.filledButton(color, borderRadius)}
+          disabled={disableButton}
           onPress={onPress}>
           <View style={styles.filledView}>
-            {iconName && (
-              <IconComponent iconName={iconName} size={20} color="white" />
-            )}
+            {iconName && <Icon name={iconName} size={20} color="white" />}
             <Text style={styles.filledText}>{text}</Text>
           </View>
         </TouchableOpacity>

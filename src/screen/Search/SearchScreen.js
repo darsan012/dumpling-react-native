@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {ScrollView, Text, StyleSheet, View} from 'react-native';
 import Header from '../../components/Headers';
 import Input from '../../components/Input';
-import FeaturedCard from '../../components/FeaturedCard';
 import {useGetAllProductsQuery} from '../../services/productApi';
 import {Images} from '../../constants/Images';
 import CardComponent from '../../components/CardComponent';
@@ -62,15 +61,6 @@ const SearchScreen = ({navigation}) => {
         {data &&
           (filterProduct(data.data, query).length !== 0 ? (
             filterProduct(data.data, query).map((item, index) => (
-              // <FeaturedCard
-              //   key={obj.productId}
-              //   momoImage={Images[i]}
-              //   momoName={obj.name}
-              //   momoPrice={obj.price}
-              //   momoDescription={obj.description}
-              //   handlePress={() => clickCard(obj.productId, Images[i])}
-              // />
-
               <CardComponent
                 key={item.productId}
                 item={item}

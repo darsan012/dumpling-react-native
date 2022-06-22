@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {Image, StyleSheet, View, Text, ScrollView} from 'react-native';
-import {faPlus, faCartArrowDown} from '@fortawesome/free-solid-svg-icons';
 import hero from '../../assets/hero.jpg';
 import Header from '../../components/Headers';
 import ButtonComponent from '../../components/ButtonComponent';
@@ -58,12 +57,16 @@ const ProductDetail = ({route, navigation}) => {
                 marginTop: 3,
               }}>
               Avaialble Stocks:
-              <Text style={{
-                fontSize: 16,
-                color: 'green',
-                fontWeight: 'bold',
-                marginTop: 17,
-              }}> {productDetail.data.data.stockQuantity}</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: 'green',
+                  fontWeight: 'bold',
+                  marginTop: 17,
+                }}>
+                {' '}
+                {productDetail.data.data.stockQuantity}
+              </Text>
             </Text>
             <Text
               style={{

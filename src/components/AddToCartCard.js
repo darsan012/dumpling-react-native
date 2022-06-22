@@ -1,19 +1,10 @@
 import React, {useState} from 'react';
-import {
-  Image,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Alert,
-  Modal,
-} from 'react-native';
+import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {Constants} from '../constants/Constants';
 import {removeFromCart} from '../store/slices/cartSlice';
 import UpDownButton from './UpDownButton';
-import IconComponent from './IconComponent';
-import {faMultiply} from '@fortawesome/free-solid-svg-icons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const AddToCartCard = ({momoImage, momoName, momoPrice, id}) => {
   const {cart} = useSelector(state => state.cart);
@@ -43,7 +34,7 @@ const AddToCartCard = ({momoImage, momoName, momoPrice, id}) => {
             borderRadius: 20,
             backgroundColor: '#3d3d3d',
           }}>
-          <IconComponent iconName={faMultiply} size={15} color="white" />
+          <Icon name="cut" size={15} color="white" />
         </TouchableOpacity>
         <View style={styles.upDownWrapper}>
           {cart.filter(item => item.productId === id).length !== 0 && (

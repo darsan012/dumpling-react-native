@@ -13,6 +13,8 @@ const CheckoutScreen = () => {
   const [email, setEmail] = useState('');
   const [number, setNumber] = useState('');
   const [address, setAddress] = useState('');
+  const [disableButton, setDisableButton] = useState(false);
+
   const dispatch = useDispatch();
 
   const [nameErr, setNameErr] = useState({});
@@ -27,6 +29,7 @@ const CheckoutScreen = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+    setDisableButton(true);
     const isNameValid = nameValidation();
     const isEmailValid = emailValidation();
     const isMessageValid = numberValidation();
@@ -68,7 +71,11 @@ const CheckoutScreen = () => {
       };
       setContactInfo();
     }
+    setTimeout(() => {
+      setDisableButton(false);
+    }, 5000);
   };
+
   //name validation
   const nameValidation = () => {
     const nameErr = {};
@@ -234,6 +241,7 @@ const CheckoutScreen = () => {
           borderRadius={5}
           color={Constants.color.colorWarning}
           onPress={onSubmit}
+          disableButton={disableButton}
         />
       </View>
     </View>

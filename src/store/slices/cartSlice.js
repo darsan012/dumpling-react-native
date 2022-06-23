@@ -65,9 +65,11 @@ export const cartSlice = createSlice({
                   temp = parseInt(action.payload.quantity);
                 } else {
                   Alert.alert(
-                    'Sorry your order size exceed our stock size, please forgive us!!',
+                    `Sorry we have only ${item.stockQuantity} left for this item and is added in your cart!!`,
                   );
-                  temp = 0;
+                  temp = item.stockQuantity;
+                  state.totalAmount -= item.quantity * parseFloat(item.price);
+                  state.totalAmount += temp * parseFloat(item.price);
                 }
               } else {
                 Alert.alert(

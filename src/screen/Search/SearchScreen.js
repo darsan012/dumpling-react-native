@@ -22,9 +22,6 @@ const SearchScreen = ({navigation}) => {
   const {data, isLoading, error} = useGetAllProductsQuery();
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
-  let filteredItems = [];
-
-  data && (filteredItems = filterProduct(data.data, query));
   const clickCard = (id, img) => {
     navigation.navigate('ProductDetail', {
       itemId: id,

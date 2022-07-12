@@ -8,6 +8,8 @@ import UpDownButton from '../../components/UpDownButton';
 import {useLazyGetSingleProductQuery} from '../../services/productApi';
 import {useSelector, useDispatch} from 'react-redux';
 import {addToCart} from '../../store/slices/cartSlice';
+import {faCartArrowDown,faPlus} from 'react-native-vector-icons/FontAwesome5';
+
 
 const ProductDetail = ({route, navigation}) => {
   const [productDetail, productDetailSet] = useState('');
